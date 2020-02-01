@@ -94,7 +94,8 @@ def rename(src, dest):
 
 def fileDelete(fqfn):
     try:
-        os.unlink(fqfn)
+        if fileExists(fqfn):
+            os.unlink(fqfn)
     except Exception as e:
         fname = sys._getframe().f_code.co_name
         errorRaise(fname, e)

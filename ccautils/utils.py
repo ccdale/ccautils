@@ -169,7 +169,7 @@ def hms(secs, small=True, short=True, single=False):
     """ convert `secs` to days, hours, minutes and seconds
 
     if `small` is True then only return the higher values
-    if they are zero
+    if they are > zero
 
     if `short` is True then the labels are their short form
 
