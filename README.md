@@ -2,7 +2,16 @@
 
 a set of utilities for python3.6+ programmes and scripts.
 
-## install
+<a name=headdd></a>
+* [Install](#install)
+* [Miscellaneous Utilities](#utils)
+    * [Usage](#uusage)
+* [File Utilities](#futils)
+    * [Usage](#fusage)
+
+
+<a name=install></a>
+## [Install](#headdd)
 
 Install for the user:
 ```
@@ -14,19 +23,22 @@ Install for a virtual environment:
 pip install ccautils
 ```
 
-## utils
+<a name=utils></a>
+## [Miscellaneous Utilities](#headdd)
 
-### usage
+<a name=uusage></a>
+### [Usage](#headdd)
 
 ```
 import ccautils.utils as UT
 ```
 
 <a name=menu></a>
-[addToString](#addtostring)
-[delimitString](#delimitstring)
-[makeDictFromString](#makedictfromstring)
-[askMe](#askme)
+* [addToString](#addtostring)
+* [delimitString](#delimitstring)
+* [makeDictFromString](#makedictfromstring)
+* [askMe](#askme)
+* [padStr](#padstr)
 
 <a name=addtostring></a>
 ### [addToString(xstr, xadd)](#menu)
@@ -92,4 +104,13 @@ UT.padStr("23", 5, "0")
 > "00023"
 ```
 
+<a name=futils></a>
+## [File Utilities](#headdd)
+
+<a name=fusage></a>
+### [Usage](#headdd)
+
+```
+import ccautils.fileutils as FT
+```
 [modeline]: # ( vim: set ft=markdown tw=74 fenc=utf-8 spell spl=en_gb mousemodel=popup: )
