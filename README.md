@@ -4,6 +4,8 @@ a set of utilities for python3.6+ programmes and scripts.
 
 <a name=headdd></a>
 * [Install](#install)
+* [Development](#devel)
+* [Testing](#testing)
 * [Miscellaneous Utilities](#utils)
     * [Usage](#uusage)
 * [File Utilities](#futils)
@@ -23,6 +25,27 @@ Install for a virtual environment:
 pip install ccautils
 ```
 
+<a name=devel></a>
+## [Development](#headdd)
+
+I use [poetry](https://python-poetry.org/) to manage these utilities.
+Clone this repository and install `poetry`, then install the dependancies.
+
+```
+git clone https://github.com/ccdale/ccautils.git
+cd ccautils
+poetry install
+```
+
+<a name=testing></a>
+## [Testing](#headdd)
+To run the tests you must have `pytest` and `poetry` installed.
+
+```
+poetry install
+poetry run pytest
+```
+
 <a name=utils></a>
 ## [Miscellaneous Utilities](#headdd)
 
@@ -39,6 +62,9 @@ import ccautils.utils as UT
 * [makeDictFromString](#makedictfromstring)
 * [askMe](#askme)
 * [padStr](#padstr)
+* [reduceTime](#reducetime)
+* [displayValue](#displayvalue)
+* [secondsFromHMS](#secondsfromhms)
 
 <a name=addtostring></a>
 ### [addToString(xstr, xadd)](#menu)
@@ -102,6 +128,74 @@ left (`padleft` is True) or the right (`padleft` is False)
 UT.padStr("23", 5, "0")
 
 > "00023"
+```
+
+<a name=reducetime></a>
+### [reduceTime(unit, secs)](#menu)
+
+Divides `secs` by `unit` returning a tuple of (`units`, `remainder`)
+
+Raises a `ValueError` if `unit` is zero.
+
+```
+UT.reduceTime(3600, 3700)
+
+> (1, 100)
+```
+
+<a name=displayvalue></a>
+### [displayValue(val, label, zero=True)](#menu)
+
+Pluralises `label` if `val` > 1 or `val` is 0.
+
+Will return an empty string if `val` == 0 and `zero` == True
+
+```
+UT.displayValue(12, "table")
+
+> "12 tables"
+```
+
+<a name=secondsfromhms></a>
+### [secondsFromHMS(shms)](#menu)
+
+converts HMS strings into integer seconds
+
+```
+UT.secondsFromHMS("01:01:23.43")
+# 1 hour, 1 minute, 23 seconds + 0.43 second
+
+> 3683
+```
+
+<a name=hms></a>
+### [hms(secs, small=True, short=True, single=False)](#menu)
+
+Convert `secs` to days, hours, minutes and seconds
+
+if `small` is True then only return the higher values if they are > zero
+
+if `short` is True then the labels are their short form
+
+if `single` is True then the labels are single letters
+
+```
+UT.hms(67)
+
+> "1 min and 7 secs"
+
+UT.hms(67, short=False)
+
+> "1 minute and 7 seconds"
+
+UT.hms(67, small=False, short=False)
+
+> "0 days, 0 hours, 1 minute and 7 seconds"
+
+secs = 86400 + 7200 + 300 + 34
+UT.hms(secs, single=True)
+
+> "1d 2h 5m 34s"
 ```
 
 <a name=futils></a>
