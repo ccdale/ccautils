@@ -70,6 +70,8 @@ import ccautils.utils as UT
 <a name=addtostring></a>
 ### [addToString(xstr, xadd)](#menu)
 
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L26)
+
 Returns a string with `xadd` appended to `xstr`.  If `xadd` is a list, all
 `str` members of the list will be appended in order.
 
@@ -81,6 +83,8 @@ UT.addToString("hello ", ["world"])
 
 <a name=delimitstring></a>
 ### [delimitString(xstr, xadd, delimeter=" - ")](#menu)
+
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L49)
 
 Constructs a string with `delimeter` between `xstr` and `xadd`.
 If `xadd` is a list, all `str` members will be appended with the
@@ -94,6 +98,8 @@ UT.delimitString("hello", ["bright", "world"], " ")
 
 <a name=makedictfromstring></a>
 ### [makeDictFromString(istr)](#menu)
+
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L64)
 
 Constructs a dictionary from a string of parameters. Leading and trailing
 whitespace is stripped.
@@ -109,6 +115,8 @@ UT.makeDictFromString("sparam=sval, soparam = soval")
 <a name=askme></a>
 ### [askMe(q, default)](#menu)
 
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L89)
+
 Requests input from the user.  Poses the question `q`. Returns the users
 input or `default` if no input given.
 
@@ -122,6 +130,8 @@ UT.askMe("press 5, please", "8")
 <a name=padstr></a>
 ### [padStr(xstr, xlen=2, pad=" ", padleft=True)](#menu)
 
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L101)
+
 Returns `xstr` `pad`ded to the required length, either on the
 left (`padleft` is True) or the right (`padleft` is False)
 
@@ -133,6 +143,8 @@ UT.padStr("23", 5, "0")
 
 <a name=reducetime></a>
 ### [reduceTime(unit, secs)](#menu)
+
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L115)
 
 Divides `secs` by `unit` returning a tuple of (`units`, `remainder`)
 
@@ -147,6 +159,8 @@ UT.reduceTime(3600, 3700)
 <a name=displayvalue></a>
 ### [displayValue(val, label, zero=True)](#menu)
 
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L131)
+
 Pluralises `label` if `val` > 1 or `val` is 0.
 
 Will return an empty string if `val` == 0 and `zero` == True
@@ -160,6 +174,8 @@ UT.displayValue(12, "table")
 <a name=secondsfromhms></a>
 ### [secondsFromHMS(shms)](#menu)
 
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L142)
+
 converts HMS strings into integer seconds
 
 ```
@@ -171,6 +187,8 @@ UT.secondsFromHMS("01:01:23.43")
 
 <a name=hms></a>
 ### [hms(secs, small=True, short=True, single=False)](#menu)
+
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L168)
 
 Convert `secs` to days, hours, minutes and seconds
 
