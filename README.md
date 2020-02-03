@@ -65,6 +65,7 @@ import ccautils.utils as UT
 * [reduceTime](#reducetime)
 * [displayValue](#displayvalue)
 * [secondsFromHMS](#secondsfromhms)
+* [hms](#hms)
 
 <a name=addtostring></a>
 ### [addToString(xstr, xadd)](#menu)
