@@ -46,19 +46,40 @@ def addToString(xstr, xadd):
         errorRaise(fname, e)
 
 
-def delimitString(xstr, xadd, delimeter=" - "):
+def delimitString(xstr, delimeter=" - "):
     try:
-        if type(xadd) is list:
-            nlst = []
-            for i in xadd:
-                nlst.append(delimeter)
-                nlst.append(i)
-            return addToString(xstr, nlst)
-        else:
-            return addToString(xstr, [delimeter, addstr])
+        op = ""
+        xlist = None
+        if type(xstr) is str:
+            xlist = xstr.split(" ")
+        elif type(xstr) is list:
+            xlist = xstr
+        if xlist is None:
+            raise ValueError("delimitString: parameter must be string or list")
+        for xl in xlist:
+            if len(op) > 0:
+                op += delimeter + xl
+            else:
+                op = xl
+        return op
     except Exception as e:
         fname = sys._getframe().f_code.co_name
         errorRaise(fname, e)
+
+
+# def delimitString(xstr, xadd, delimeter=" - "):
+#     try:
+#         if type(xadd) is list:
+#             nlst = []
+#             for i in xadd:
+#                 nlst.append(delimeter)
+#                 nlst.append(i)
+#             return addToString(xstr, nlst)
+#         else:
+#             return addToString(xstr, [delimeter, addstr])
+#     except Exception as e:
+#         fname = sys._getframe().f_code.co_name
+#         errorRaise(fname, e)
 
 
 def makeDictFromString(istr):
