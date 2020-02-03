@@ -17,10 +17,9 @@ def test_addToStringList():
 
 
 def test_delimitStringList():
-    xstr = "A"
     delim = " "
-    xadd = ["String", "added"]
-    zstr = UT.delimitString(xstr, xadd, delim)
+    xadd = ["A", "String", "added"]
+    zstr = UT.delimitString(xadd, delim)
     assert zstr == "A String added"
 
 
