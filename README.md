@@ -76,7 +76,7 @@ Returns a string with `xadd` appended to `xstr`.  If `xadd` is a list, all
 `str` members of the list will be appended in order.
 
 ```
-UT.addToString("hello ", ["world"])
+UT.addToString("hello", [" ", "world"])
 
 > "hello world"
 ```
