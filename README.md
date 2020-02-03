@@ -82,18 +82,22 @@ UT.addToString("hello ", ["world"])
 ```
 
 <a name=delimitstring></a>
-### [delimitString(xstr, xadd, delimeter=" - ")](#menu)
+### [delimitString(xstr, delimeter=" - ")](#menu)
 
 [Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L49)
 
-Constructs a string with `delimeter` between `xstr` and `xadd`.
-If `xadd` is a list, all `str` members will be appended with the
-`delimeter` inserted between them.
+`xstr` can be a list or a string.  If it is a string, it is spit apart at
+spaces and delimeted with `delimeter`.  If it is a list, each member is
+delimeted with `delimeter`.
 
 ```
-UT.delimitString("hello", ["bright", "world"], " ")
+UT.delimitString(["bright", "world"], " ")
 
-> "hello bright world"
+> "bright world"
+
+UT.delimitString("I wandered lonely as an artichoke", ".")
+
+> "I.wandered.lonely.as.an.artichoke"
 ```
 
 <a name=makedictfromstring></a>
