@@ -4,7 +4,7 @@ version = "0.1.2"
 description = "A set of useful utilities for python programs"
 authors = ["ccdale <chris.charles.allison+ccautils@gmail.com>"]
 license = "GPL-3.0-or-later"
-readme = README.md
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.6"
