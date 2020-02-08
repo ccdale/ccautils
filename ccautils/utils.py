@@ -14,7 +14,7 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with ccautils.  If not, see <http://www.gnu.org/licenses/>.
-""" utils.py
+"""utils.py
 
 a set of utilities for python programmes and scripts
 """
@@ -24,10 +24,16 @@ from ccautils.errors import errorRaise
 
 
 def addToString(xstr, xadd):
-    """ appends the string `xadd` to the string `xstr`
+    """Appends the string `xadd` to the string `xstr`
 
     if xadd is a list then each list member that is a string
     is appended to xstr
+
+    Args:
+        xstr: str input string
+        xadd: list or str
+
+    Returns: str
     """
     try:
         if type(xstr) is str:
@@ -47,6 +53,14 @@ def addToString(xstr, xadd):
 
 
 def delimitString(xstr, delimeter=" - "):
+    """Delimits the string with the delimiter.
+
+    Args:
+        xstr: str or list
+        delimeter: str
+
+    Returns: str
+    """
     try:
         op = ""
         xlist = None
@@ -67,31 +81,16 @@ def delimitString(xstr, delimeter=" - "):
         errorRaise(fname, e)
 
 
-# def delimitString(xstr, xadd, delimeter=" - "):
-#     try:
-#         if type(xadd) is list:
-#             nlst = []
-#             for i in xadd:
-#                 nlst.append(delimeter)
-#                 nlst.append(i)
-#             return addToString(xstr, nlst)
-#         else:
-#             return addToString(xstr, [delimeter, addstr])
-#     except Exception as e:
-#         fname = sys._getframe().f_code.co_name
-#         errorRaise(fname, e)
-
-
 def makeDictFromString(istr):
-    """ makes a dictionary from a string of parameters
+    """Makes a dictionary from a string of parameters.
 
     leading and trailing white space is stripped
 
-    params:
-        istr: a string in the form:
+    Args:
+        istr: str
             'someparam= somevalue,someotherparam =someothervalue  '
 
-    returns a dictionary:
+    Returns: dict
         {"someparam": "somevalue", "someotherparam": "someothervalue"}
     """
     try:
@@ -108,6 +107,15 @@ def makeDictFromString(istr):
 
 
 def askMe(q, default):
+    """Input routine for the console.
+
+    Args:
+        q: str input question
+        default: str default answer
+
+    Returns:
+        str: user input or default
+    """
     try:
         ret = default
         val = input(f"{q} ({default}) > ")
@@ -120,6 +128,16 @@ def askMe(q, default):
 
 
 def padStr(xstr, xlen=2, pad=" ", padleft=True):
+    """Pads the input string to be the required length.
+
+    Args:
+        xstr: str the input string
+        xlen: int the required length
+        pad: str the character or characters to pad with
+        padleft: Bool
+
+    Returns: str the input string padded to the required length with pad
+    """
     try:
         zstr = xstr
         while len(zstr) < xlen:
@@ -134,6 +152,17 @@ def padStr(xstr, xlen=2, pad=" ", padleft=True):
 
 
 def reduceTime(unit, secs):
+    """Performs the modulo function on secs.
+
+    Args:
+        unit: int the divisor
+        secs: int a number
+
+    Returns: tuple (
+        units: int
+        remainder: int
+        )
+    """
     try:
         rem = units = 0
         if unit > 0:
@@ -150,6 +179,17 @@ def reduceTime(unit, secs):
 
 
 def displayValue(val, label, zero=True):
+    """Pluralises the label.
+
+    if zero is True val == 0 then the empty string is returned.
+
+    Args:
+        val: number
+        label: str
+        zero: Bool
+
+    Returns: str
+    """
     try:
         if zero and val == 0:
             return ""
@@ -161,8 +201,11 @@ def displayValue(val, label, zero=True):
 
 
 def secondsFromHMS(shms):
-    """
-    convert "01:02:32.47" to seconds
+    """Convert "01:02:32.47" to seconds.
+
+    Args: shms: str input string seperated by colons
+
+    Returns: int: number of seconds represented by input string
     """
     try:
         hrs = mins = secs = extra = 0
@@ -187,6 +230,10 @@ def secondsFromHMS(shms):
 
 
 def decomplexifyhms(tim, index, labels, labindex, oplen, colons=False):
+    """Secondary function to remove some of the complexity of the hms function.
+
+    Do not call this function directly
+    """
     try:
         op = []
         if colons:
@@ -212,7 +259,7 @@ def decomplexifyhms(tim, index, labels, labindex, oplen, colons=False):
 
 
 def hms(secs, small=True, short=True, single=False, colons=False):
-    """ convert `secs` to days, hours, minutes and seconds
+    """Convert `secs` to days, hours, minutes and seconds.
 
     if `small` is True then only return the higher values
     if they are > zero
@@ -223,6 +270,15 @@ def hms(secs, small=True, short=True, single=False, colons=False):
 
     if `colons` is True then the output is of the form:
          01:03:23
+
+    Args:
+        secs: int the number of seconds
+        small: Bool do not return day, hours or mins if they are zero
+        short: Bool use short labels
+        single: Bool use single letter labels
+        colons: Bool return a string of the form 01:32:24
+
+    Returns: str
     """
     try:
         labs = [
