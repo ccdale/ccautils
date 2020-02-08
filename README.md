@@ -247,6 +247,8 @@ import ccautils.fileutils as FT
 <a name=fmenu></a>
 * [fileExists](#fileexists)
 * [dirExists](#direxists)
+* [dfExists](#dfexists)
+* [makePath](#makepath)
 
 <a name=fileexists></a>
 ### [fileExists(fqfn)](#fmenu)
@@ -282,5 +284,37 @@ else:
     raise(f"Directory {dn} does not exist")
 ```
 
-[modeline]: # ( vim: set ft=markdown tw=74 fenc=utf-8 spell spl=en_gb mousemodel=popup: )
+<a name=dfexists></a>
+### [dfExists(fqdfn)](#fmenu)
 
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/fileutils.py#L46)
+
+Tests to see if the file `fqdfn` exists, if not checks if `fqdfn` is
+a directory that exists.
+
+Returns: `True` if `fqdfn` exists, else `False`
+
+```
+dn = "/home/chris"
+if FT.dfExists(dn):
+    # do something
+else:
+    raise(f"File / Directory {dn} does not exist")
+```
+
+<a name=makepath></a>
+### [makePath(pn)](#fmenu)
+
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/fileutils.py#L57)
+
+Makes the path `pn` including any missing parent directories.  Does
+nothing if path `pn` already exists.
+
+Returns: None
+```
+dn = "/home/chris/appdir/subdir"
+FT.makePath(dn)
+```
+
+
+[modeline]: # ( vim: set ft=markdown tw=74 fenc=utf-8 spell spl=en_gb mousemodel=popup: )
