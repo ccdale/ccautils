@@ -45,7 +45,7 @@ def test_padStr_left():
 
 
 def test_padStr_right_zeros():
-    """It pads on the right with zeros"""
+    """It pads on the right with zeros."""
     xstr = "3"
     ystr = UT.padStr(xstr, 4, "0", False)
     assert ystr == "3000"
