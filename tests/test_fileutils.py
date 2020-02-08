@@ -21,13 +21,13 @@ def test_fileExists_nonexist():
 def test_dirExists():
     dird = os.path.dirname(__file__)
     got = FT.dirExists(dird)
-    assert got == True
+    assert got is True
 
 
 def test_dfExists():
     dird = os.path.dirname(__file__)
     got = FT.dfExists(dird)
-    assert got == True
+    assert got is True
 
 
 def test_absPath():
@@ -39,17 +39,17 @@ def test_absPath():
 
 def test_fileTouch():
     FT.fileTouch(testfile)
-    assert True == FT.fileExists(testfile)
+    assert FT.fileExists(testfile) is True
 
 
 def test_rename():
     FT.rename(testfile, renamefile)
-    assert True == FT.fileExists(renamefile)
+    assert FT.fileExists(renamefile) is True
 
 
 def test_fileDelete():
     FT.fileDelete(renamefile)
-    assert False == FT.fileExists(renamefile)
+    assert FT.fileExists(renamefile) is False
 
 
 def test_fileSize():
@@ -83,4 +83,4 @@ def test_readFile():
 def test_cleanup():
     FT.fileDelete(testfile)
     FT.fileDelete(renamefile)
-    assert FT.fileExists(testfile) == False and FT.fileExists(renamefile) == False
+    assert FT.fileExists(testfile) is False and FT.fileExists(renamefile) is False
