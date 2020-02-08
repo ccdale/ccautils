@@ -1,9 +1,9 @@
-"""test file for utils.py file of ccautils module."""
+"""Test file for utils.py file of ccautils module."""
 import ccautils.utils as UT
 
 
 def test_addToStringStr():
-    """addToString test string input."""
+    """Input strings are concatenated."""
     xstr = "A String"
     astr = " added"
     zstr = UT.addToString(xstr, astr)
@@ -11,7 +11,7 @@ def test_addToStringStr():
 
 
 def test_addToStringList():
-    """addToString test list input."""
+    """List is exploded and each member is concatenated."""
     xstr = "A String"
     lstr = [" ", "added"]
     zstr = UT.addToString(xstr, lstr)
@@ -19,7 +19,7 @@ def test_addToStringList():
 
 
 def test_delimitStringList():
-    """delimitString test list input."""
+    """It concatenates each string with the delimeter."""
     delim = " "
     xadd = ["A", "String", "added"]
     zstr = UT.delimitString(xadd, delim)
@@ -27,7 +27,7 @@ def test_delimitStringList():
 
 
 def test_makeDictFromString():
-    """makeDictFromString test."""
+    """It removes extraneous white space and forms a dict from the string."""
     istr = "someparam   = somevalue,someotherparam =someothervalue  "
     xd = UT.makeDictFromString(istr)
     wd = {
@@ -38,21 +38,21 @@ def test_makeDictFromString():
 
 
 def test_padStr_left():
-    """padStr on the left test."""
+    """It pads on the left."""
     xstr = "3"
     ystr = UT.padStr(xstr)
     assert ystr == " 3"
 
 
 def test_padStr_right_zeros():
-    """padStr on the right with zeros test."""
+    """It pads on the right with zeros"""
     xstr = "3"
     ystr = UT.padStr(xstr, 4, "0", False)
     assert ystr == "3000"
 
 
 def test_reduceTime():
-    """reduceTime test."""
+    """It returns a tuple of unit and modulo remainder."""
     unit = 60
     secs = 100
     exp = (1, 40)
@@ -61,7 +61,7 @@ def test_reduceTime():
 
 
 def test_displayValue():
-    """displayValue multi-values test."""
+    """It pluralises the input label."""
     val = 2
     label = "elephant"
     got = UT.displayValue(val, label)
@@ -69,7 +69,7 @@ def test_displayValue():
 
 
 def test_displayValue_one():
-    """displayValue single value test."""
+    """It doesn't pluralise the input label."""
     val = 1
     label = "elephant"
     got = UT.displayValue(val, label)
@@ -77,7 +77,7 @@ def test_displayValue_one():
 
 
 def test_displayValue_zero():
-    """displayValue zero value test."""
+    """It pluralises the input label."""
     val = 0
     label = "elephant"
     got = UT.displayValue(val, label)
@@ -85,7 +85,7 @@ def test_displayValue_zero():
 
 
 def test_secondsFromHMS():
-    """secondsFromHMS test - no carry."""
+    """It doesn't carry the under 500 milliseconds into seconds."""
     hms = "01:01:23.43"
     secs = UT.secondsFromHMS(hms)
     exp = 3600 + 60 + 23
@@ -93,7 +93,7 @@ def test_secondsFromHMS():
 
 
 def test_secondsFromHMS_carry():
-    """secondsFromHMS test with carry."""
+    """It carries the over 500 milliseconds into seconds."""
     hms = "01:01:23.73"
     secs = UT.secondsFromHMS(hms)
     exp = 3600 + 60 + 23 + 1
@@ -101,7 +101,7 @@ def test_secondsFromHMS_carry():
 
 
 def test_hms_small_short():
-    """hms test small short."""
+    """It returns a short time string with short labels."""
     secs = 67
     got = UT.hms(secs)
     exp = "1 min and 7 secs"
@@ -109,7 +109,7 @@ def test_hms_small_short():
 
 
 def test_hms_small():
-    """hms test small."""
+    """It returns a short time string."""
     secs = 67
     got = UT.hms(secs, short=False)
     exp = "1 minute and 7 seconds"
@@ -117,7 +117,7 @@ def test_hms_small():
 
 
 def test_hms_long():
-    """hms test long."""
+    """It returns a full time string, with zero values."""
     secs = 67
     got = UT.hms(secs, small=False, short=False)
     exp = "0 days, 0 hours, 1 minute and 7 seconds"
@@ -125,7 +125,7 @@ def test_hms_long():
 
 
 def test_hms_single():
-    """hms test single."""
+    """It returns single letter labels."""
     secs = 86400 + 7200 + 300 + 34
     got = UT.hms(secs, single=True)
     exp = "1d 2h 5m 34s"
@@ -133,7 +133,7 @@ def test_hms_single():
 
 
 def test_hms_colons_full():
-    """hms test colons full."""
+    """It returns days, hours, minutes and seconds, padded with zeros, delimited by colons."""
     secs = 86400 + 7200 + 300 + 34
     got = UT.hms(secs, colons=True)
     exp = "01:02:05:34"
@@ -141,7 +141,7 @@ def test_hms_colons_full():
 
 
 def test_hms_colons_short():
-    """hms test short colons."""
+    """It returns only minutes and seconds, padded with zeros, delimited by colons."""
     secs = 302
     got = UT.hms(secs, colons=True)
     exp = "05:02"
