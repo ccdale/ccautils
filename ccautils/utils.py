@@ -220,6 +220,9 @@ def hms(secs, small=True, short=True, single=False, colons=False):
     if `short` is True then the labels are their short form
 
     if `single` is True then the labels are single letters
+
+    if `colons` is True then the output is of the form:
+         01:03:23
     """
     try:
         labs = [

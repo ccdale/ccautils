@@ -191,9 +191,9 @@ UT.secondsFromHMS("01:01:23.43")
 ```
 
 <a name=hms></a>
-### [hms(secs, small=True, short=True, single=False)](#menu)
+### [hms(secs, small=True, short=True, single=False, colons=False)](#menu)
 
-[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L168)
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L214)
 
 Convert `secs` to days, hours, minutes and seconds
 
@@ -202,6 +202,8 @@ if `small` is True then only return the higher values if they are > zero
 if `short` is True then the labels are their short form
 
 if `single` is True then the labels are single letters
+
+if `colons` is True then the output is of the form `01:03:23`
 
 ```
 UT.hms(67)
@@ -220,6 +222,16 @@ secs = 86400 + 7200 + 300 + 34
 UT.hms(secs, single=True)
 
 > "1d 2h 5m 34s"
+
+secs = 345
+UT.hms(secs, colons=True)
+
+> "05:45"
+
+secs = 86400 + 7200 + 300 + 34
+UT.hms(secs, colons=True)
+
+> "01:02:05:34"
 ```
 
 <a name=futils></a>
@@ -231,4 +243,26 @@ UT.hms(secs, single=True)
 ```
 import ccautils.fileutils as FT
 ```
+
+<a name=fmenu></a>
+* [fileExists](#fileexists)
+
+<a name=fileexists></a>
+### [fileexists(fqfn)](#fmenu)
+
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/fileutils.py#L30)
+
+Tests for the existence of the fully-qualified (absolute) file name `fqfn`
+
+Returns: `True` if it exists, else `False`
+
+```
+fn = "/home/chris/output.csv"
+if FT.fileExists(fn):
+    # do something
+else:
+    raise(f"File {fn} does not exist")
+```
+
 [modeline]: # ( vim: set ft=markdown tw=74 fenc=utf-8 spell spl=en_gb mousemodel=popup: )
+
