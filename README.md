@@ -246,15 +246,16 @@ import ccautils.fileutils as FT
 
 <a name=fmenu></a>
 * [fileExists](#fileexists)
+* [dirExists](#direxists)
 
 <a name=fileexists></a>
-### [fileexists(fqfn)](#fmenu)
+### [fileExists(fqfn)](#fmenu)
 
 [Code](https://github.com/ccdale/ccautils/blob/master/ccautils/fileutils.py#L30)
 
 Tests for the existence of the fully-qualified (absolute) file name `fqfn`
 
-Returns: `True` if it exists, else `False`
+Returns: `True` if `fqfn` exists, else `False`
 
 ```
 fn = "/home/chris/output.csv"
@@ -262,6 +263,23 @@ if FT.fileExists(fn):
     # do something
 else:
     raise(f"File {fn} does not exist")
+```
+
+<a name=direxists></a>
+### [dirExists(fqdn)](#fmenu)
+
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/fileutils.py#L38)
+
+Tests for the existence of the fully-qualified (absolute) directory name `fqdn`
+
+Returns: `True` if `fqdn` exists, else `False`
+
+```
+dn = "/home/chris"
+if FT.dirExists(dn):
+    # do something
+else:
+    raise(f"Directory {dn} does not exist")
 ```
 
 [modeline]: # ( vim: set ft=markdown tw=74 fenc=utf-8 spell spl=en_gb mousemodel=popup: )
