@@ -243,16 +243,6 @@ def hms(secs, small=True, short=True, single=False):
                 started = True
             if started:
                 op += decomplexifyhms(tim, cn, labs, cnlabs, len(op))
-                # delim = " " if single else ", "
-                # if cn == 3:
-                #     delim = " " if single else " and "
-                # if len(op) > 0:
-                #     op.append(delim)
-                # if single:
-                #     sval = str(tim[cn]) + labs[cnlabs][cn]
-                # else:
-                #     sval = displayValue(tim[cn], labs[cnlabs][cn], zero=False)
-                # op.append(sval)
         msg = addToString("", op)
         return msg
     except Exception as e:
