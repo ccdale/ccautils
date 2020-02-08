@@ -15,7 +15,7 @@ def test_fileExists():
 
 def test_fileExists_nonexist():
     got = FT.fileExists("/non-existant")
-    assert got == False
+    assert got is False
 
 
 def test_dirExists():

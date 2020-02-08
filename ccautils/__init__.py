@@ -1,1 +1,2 @@
-__version__ = "0.1.3"
+""" ccautils package"""
+__version__ = "0.1.4"
