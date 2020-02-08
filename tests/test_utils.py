@@ -1,4 +1,3 @@
-import pytest
 import ccautils.utils as UT
 
 

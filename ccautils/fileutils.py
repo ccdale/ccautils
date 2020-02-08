@@ -19,11 +19,12 @@
 a set of file based utilities for python programmes and scripts
 """
 import os
-import sys
 import hashlib
+import sys
 from pathlib import Path
-import ccautils.utils as UT
+
 from ccautils.errors import errorRaise
+import ccautils.utils as UT
 
 
 def fileExists(fqfn):
@@ -113,9 +114,11 @@ def fileSize(fqfn):
 def sizeof_fmt(num, suffix="B"):
     """
     from article by Fred Cirera:
-    https://web.archive.org/web/20111010015624/http://blogmag.net/blog/read/38/Print_human_readable_file_size
+    https://web.archive.org/web/20111010015624/http://blogmag.net/ \
+            blog/read/38/Print_human_readable_file_size
     and stackoverflow:
-    https://stackoverflow.com/questions/1094841/reusable-library-to-get-human-readable-version-of-file-size
+    https://stackoverflow.com/questions/1094841/ \
+            reusable-library-to-get-human-readable-version-of-file-size
     """
     for unit in ["", "K", "M", "G", "T", "P", "E", "Z"]:
         if abs(num) < 1024.0:
@@ -152,11 +155,11 @@ def fileTouch(fqfn, truncate=True):
     """
     try:
         if fileExists(fqfn) and truncate:
-            junk = open(fqfn, "w").close()
+            open(fqfn, "w").close()
         elif fileExists(fqfn):
-            junk = open(fqfn, "r").close()
+            open(fqfn, "r").close()
         else:
-            junk = open(fqfn, "w").close()
+            open(fqfn, "w").close()
     except Exception as e:
         fname = sys._getframe().f_code.co_name
         errorRaise(fname, e)

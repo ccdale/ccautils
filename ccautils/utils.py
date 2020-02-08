@@ -18,8 +18,8 @@
 
 a set of utilities for python programmes and scripts
 """
-import os
 import sys
+
 from ccautils.errors import errorRaise
 
 
@@ -186,6 +186,25 @@ def secondsFromHMS(shms):
         errorRaise(fname, e)
 
 
+def decomplexifyhms(tim, index, labels, labindex, oplen):
+    try:
+        op = []
+        delim = " " if labindex == 2 else ", "
+        if index == 3:
+            delim = " " if labindex == 2 else " and "
+        if oplen > 0:
+            op.append(delim)
+        if labindex == 2:
+            sval = str(tim[index]) + labels[labindex][index]
+        else:
+            sval = displayValue(tim[index], labels[labindex][index], zero=False)
+        op.append(sval)
+        return op
+    except Exception as e:
+        fname = sys._getframe().f_code.co_name
+        errorRaise(fname, e)
+
+
 def hms(secs, small=True, short=True, single=False):
     """ convert `secs` to days, hours, minutes and seconds
 
@@ -197,9 +216,15 @@ def hms(secs, small=True, short=True, single=False):
     if `single` is True then the labels are single letters
     """
     try:
-        labels = ["day", "hour", "minute", "second"]
-        shorts = ["day", "hour", "min", "sec"]
-        singles = ["d", "h", "m", "s"]
+        # labels = ["day", "hour", "minute", "second"]
+        # shorts = ["day", "hour", "min", "sec"]
+        # singles = ["d", "h", "m", "s"]
+        labs = [
+            ["day", "hour", "minute", "second"],
+            ["day", "hour", "min", "sec"],
+            ["d", "h", "m", "s"],
+        ]
+
         tim = [0, 0, 0, 0]
         op = []
         onemin = 60
@@ -210,24 +235,24 @@ def hms(secs, small=True, short=True, single=False):
         tim[2], tim[3] = reduceTime(onemin, rem)
         started = not small
         if single:
-            xlabs = singles
+            cnlabs = 2
         else:
-            xlabs = shorts if short else labels
+            cnlabs = 1 if short else 0
         for cn in range(4):
-            if not started:
-                if tim[cn] > 0:
-                    started = True
+            if not started and tim[cn] > 0:
+                started = True
             if started:
-                delim = " " if single else ", "
-                if cn == 3:
-                    delim = " " if single else " and "
-                if len(op) > 0:
-                    op.append(delim)
-                if single:
-                    sval = str(tim[cn]) + xlabs[cn]
-                else:
-                    sval = displayValue(tim[cn], xlabs[cn], zero=False)
-                op.append(sval)
+                op += decomplexifyhms(tim, cn, labs, cnlabs, len(op))
+                # delim = " " if single else ", "
+                # if cn == 3:
+                #     delim = " " if single else " and "
+                # if len(op) > 0:
+                #     op.append(delim)
+                # if single:
+                #     sval = str(tim[cn]) + labs[cnlabs][cn]
+                # else:
+                #     sval = displayValue(tim[cn], labs[cnlabs][cn], zero=False)
+                # op.append(sval)
         msg = addToString("", op)
         return msg
     except Exception as e:
