@@ -1,8 +1,10 @@
+"""nox file for ccautils module"""
 import nox
 
 
 @nox.session(python=["3.6", "3.7", "3.8"])
 def tests(session):
+    """nox session for pytest"""
     # args = session.posargs or ["--cov"]
     args = session.posargs
     session.run("poetry", "install", external=True)
@@ -14,6 +16,7 @@ locations = "ccautils", "noxfile.py", "tests"
 
 @nox.session(python=["3.8"])
 def lint(session):
+    """nox session for linting"""
     args = session.posargs or locations
     session.install(
         "flake8",
