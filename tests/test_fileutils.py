@@ -1,4 +1,4 @@
-"""test file for fileutils.py file of ccautils module."""
+"""Test file for fileutils.py file of ccautils module."""
 import os
 
 import ccautils.fileutils as FT
@@ -10,33 +10,33 @@ testlines = ["one\n", "two\n", "Three"]
 
 
 def test_fileExists():
-    """fileExists file exists test."""
+    """It exits True."""
     got = FT.fileExists(__file__)
     assert got is True
 
 
 def test_fileExists_nonexist():
-    """fileExists file doesn't exist test."""
+    """It exits False."""
     got = FT.fileExists("/non-existant")
     assert got is False
 
 
 def test_dirExists():
-    """dirExists directory exists test."""
+    """It exits True."""
     dird = os.path.dirname(__file__)
     got = FT.dirExists(dird)
     assert got is True
 
 
 def test_dfExists():
-    """dfExists directory exists test."""
+    """It exits True."""
     dird = os.path.dirname(__file__)
     got = FT.dfExists(dird)
     assert got is True
 
 
 def test_absPath():
-    """absPath file transform test."""
+    """It expands `~` creating a fully-qualified file name."""
     tpath = "~/.bashrc"
     epath = os.environ.get("HOME") + "/.bashrc"
     got = FT.absPath(tpath)
@@ -44,25 +44,25 @@ def test_absPath():
 
 
 def test_fileTouch():
-    """fileTouch test."""
+    """It creates the empty file and exits True."""
     FT.fileTouch(testfile)
     assert FT.fileExists(testfile) is True
 
 
 def test_rename():
-    """rename file test."""
+    """It renames the test file and exits True."""
     FT.rename(testfile, renamefile)
     assert FT.fileExists(renamefile) is True
 
 
 def test_fileDelete():
-    """fileDelete test."""
+    """It deletes the test file and exits False."""
     FT.fileDelete(renamefile)
     assert FT.fileExists(renamefile) is False
 
 
 def test_fileSize():
-    """fileSize test."""
+    """It computes the size of the file."""
     with open(testfile, "w") as ofn:
         ofn.writelines(testlines)
     sz = FT.fileSize(testfile)
@@ -70,13 +70,13 @@ def test_fileSize():
 
 
 def test_sizeof_fmt():
-    """sizeof_fmt test."""
+    """It displays the file size in human readable form."""
     got = FT.sizeof_fmt(6445440)
     assert got == "6.1MB"
 
 
 def test_getFileHash():
-    """getFileHash test."""
+    """It computes the file's sha256 hash."""
     fhash, fsize = FT.getFileHash(testfile)
     assert (
         fhash == "181d226b4a56b29a8ace235df83c9b0758a9decb4d6a45d0a567a6ddd1e1c970"
@@ -85,7 +85,7 @@ def test_getFileHash():
 
 
 def test_readFile():
-    """readFile test."""
+    """It sets the test string to be the content of the test file."""
     xstr = ""
     for line in testlines:
         xstr += line
@@ -94,7 +94,7 @@ def test_readFile():
 
 
 def test_cleanup():
-    """cleanup after testing."""
+    """It cleans up the test files and exits False."""
     FT.fileDelete(testfile)
     FT.fileDelete(renamefile)
     assert FT.fileExists(testfile) is False and FT.fileExists(renamefile) is False
