@@ -186,18 +186,24 @@ def secondsFromHMS(shms):
         errorRaise(fname, e)
 
 
-def decomplexifyhms(tim, index, labels, labindex, oplen):
+def decomplexifyhms(tim, index, labels, labindex, oplen, colons=False):
     try:
         op = []
-        delim = " " if labindex == 2 else ", "
-        if index == 3:
-            delim = " " if labindex == 2 else " and "
+        if colons:
+            delim = ":"
+        else:
+            delim = " " if labindex == 2 else ", "
+            if index == 3:
+                delim = " " if labindex == 2 else " and "
         if oplen > 0:
             op.append(delim)
-        if labindex == 2:
-            sval = str(tim[index]) + labels[labindex][index]
+        if colons:
+            sval = padStr(str(tim[index]), pad="0")
         else:
-            sval = displayValue(tim[index], labels[labindex][index], zero=False)
+            if labindex == 2:
+                sval = str(tim[index]) + labels[labindex][index]
+            else:
+                sval = displayValue(tim[index], labels[labindex][index], zero=False)
         op.append(sval)
         return op
     except Exception as e:
@@ -205,7 +211,7 @@ def decomplexifyhms(tim, index, labels, labindex, oplen):
         errorRaise(fname, e)
 
 
-def hms(secs, small=True, short=True, single=False):
+def hms(secs, small=True, short=True, single=False, colons=False):
     """ convert `secs` to days, hours, minutes and seconds
 
     if `small` is True then only return the higher values
@@ -216,9 +222,6 @@ def hms(secs, small=True, short=True, single=False):
     if `single` is True then the labels are single letters
     """
     try:
-        # labels = ["day", "hour", "minute", "second"]
-        # shorts = ["day", "hour", "min", "sec"]
-        # singles = ["d", "h", "m", "s"]
         labs = [
             ["day", "hour", "minute", "second"],
             ["day", "hour", "min", "sec"],
@@ -226,13 +229,12 @@ def hms(secs, small=True, short=True, single=False):
         ]
 
         tim = [0, 0, 0, 0]
+        units = [60 * 60 * 24, 60 * 60, 60]
+        rem = secs
+        for index in range(3):
+            tim[index], rem = reduceTime(units[index], rem)
+        tim[3] = rem
         op = []
-        onemin = 60
-        onehour = onemin * 60
-        oneday = onehour * 24
-        tim[0], rem = reduceTime(oneday, secs)
-        tim[1], rem = reduceTime(onehour, rem)
-        tim[2], tim[3] = reduceTime(onemin, rem)
         started = not small
         if single:
             cnlabs = 2
@@ -242,7 +244,7 @@ def hms(secs, small=True, short=True, single=False):
             if not started and tim[cn] > 0:
                 started = True
             if started:
-                op += decomplexifyhms(tim, cn, labs, cnlabs, len(op))
+                op += decomplexifyhms(tim, cn, labs, cnlabs, len(op), colons)
         msg = addToString("", op)
         return msg
     except Exception as e:

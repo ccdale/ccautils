@@ -115,6 +115,13 @@ def test_hms_single():
     assert got == exp
 
 
+def test_hms_colons_full():
+    secs = 86400 + 7200 + 300 + 34
+    got = UT.hms(secs, colons=True)
+    exp = "01:02:05:34"
+    assert got == exp
+
+
 # def test_askMe():
 #     query = "Please press the"
 #     default = "enter key"
