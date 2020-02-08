@@ -14,7 +14,7 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with ccautils.  If not, see <http://www.gnu.org/licenses/>.
-"""utils.py
+"""Miscellaneous utility functions.
 
 a set of utilities for python programmes and scripts
 """
@@ -24,7 +24,7 @@ from ccautils.errors import errorRaise
 
 
 def addToString(xstr, xadd):
-    """Appends the string `xadd` to the string `xstr`
+    """Appends the string `xadd` to the string `xstr`.
 
     if xadd is a list then each list member that is a string
     is appended to xstr

@@ -14,7 +14,7 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with ccautils.  If not, see <http://www.gnu.org/licenses/>.
-""" fileutils.py
+"""Miscellaneous file utility functions.
 
 a set of file based utilities for python programmes and scripts
 """
