@@ -9,7 +9,8 @@ def formatErrorMsg(funcname, exc):
         funcname: str the function name where the error occurred
         exc: Exception
 
-    Returns: str
+    Returns:
+        str:
     """
     ename = type(exc).__name__
     return f"Error in {funcname}: {ename}: {exc}\n"
@@ -28,13 +29,14 @@ def errorExit(funcname, exc, errorvalue=1):
 
 
 def errorRaise(funcname, exc):
-    """Raises the exeption.
+    """Reraises the exeption.
 
     Args:
         funcname: str function name where the error occurred
         exc: Exception
 
-    Raises: Exception
+    Raises:
+        exc: Exception
     """
     sys.stderr.write(formatErrorMsg(funcname, exc))
     raise (exc)

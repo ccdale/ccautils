@@ -4,7 +4,11 @@ import nox
 
 @nox.session(python=["3.6", "3.7", "3.8"])
 def tests(session):
-    """Nox session for pytest."""
+    """Nox session for pytest.
+
+    Args:
+        session: nox session
+    """
     # args = session.posargs or ["--cov"]
     args = session.posargs
     session.run("poetry", "install", external=True)
@@ -16,7 +20,11 @@ locations = "ccautils", "noxfile.py", "tests"
 
 @nox.session(python=["3.8"])
 def lint(session):
-    """Nox session for linting."""
+    """Nox session for linting.
+
+    Args:
+        session: nox session
+    """
     args = session.posargs or locations
     session.install(
         "flake8",
@@ -24,5 +32,6 @@ def lint(session):
         "flake8-bugbear",
         "flake8-docstrings",
         "flake8-import-order",
+        "darglint",
     )
     session.run("flake8", *args)

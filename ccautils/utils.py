@@ -33,7 +33,8 @@ def addToString(xstr, xadd):
         xstr: str input string
         xadd: list or str
 
-    Returns: str
+    Returns:
+        str:
     """
     try:
         if type(xstr) is str:
@@ -59,7 +60,11 @@ def delimitString(xstr, delimeter=" - "):
         xstr: str or list
         delimeter: str
 
-    Returns: str
+    Raises:
+        ValueError: Exception
+
+    Returns:
+        str:
     """
     try:
         op = ""
@@ -90,8 +95,8 @@ def makeDictFromString(istr):
         istr: str
             'someparam= somevalue,someotherparam =someothervalue  '
 
-    Returns: dict
-        {"someparam": "somevalue", "someotherparam": "someothervalue"}
+    Returns:
+        dict: {"someparam": "somevalue", "someotherparam": "someothervalue"}
     """
     try:
         pd = {}
@@ -136,7 +141,8 @@ def padStr(xstr, xlen=2, pad=" ", padleft=True):
         pad: str the character or characters to pad with
         padleft: Bool
 
-    Returns: str the input string padded to the required length with pad
+    Returns:
+        str: the input string padded to the required length with pad
     """
     try:
         zstr = xstr
@@ -158,10 +164,11 @@ def reduceTime(unit, secs):
         unit: int the divisor
         secs: int a number
 
-    Returns: tuple (
-        units: int
-        remainder: int
-        )
+    Raises:
+        ValueError: Exception
+
+    Returns:
+        tuple: (units: int, remainder: int)
     """
     try:
         rem = units = 0
@@ -188,7 +195,8 @@ def displayValue(val, label, zero=True):
         label: str
         zero: Bool
 
-    Returns: str
+    Returns:
+        str:
     """
     try:
         if zero and val == 0:
@@ -203,9 +211,11 @@ def displayValue(val, label, zero=True):
 def secondsFromHMS(shms):
     """Convert "01:02:32.47" to seconds.
 
-    Args: shms: str input string seperated by colons
+    Args:
+        shms: str input string seperated by colons
 
-    Returns: int: number of seconds represented by input string
+    Returns:
+        int: number of seconds represented by input string
     """
     try:
         hrs = mins = secs = extra = 0
@@ -233,6 +243,17 @@ def decomplexifyhms(tim, index, labels, labindex, oplen, colons=False):
     """Secondary function to remove some of the complexity of the hms function.
 
     Do not call this function directly
+
+    Args:
+        tim: int
+        index: int
+        labels: list
+        labindex: int
+        oplen: int
+        colons: Bool
+
+    Returns:
+        list:
     """
     try:
         op = []
@@ -278,7 +299,8 @@ def hms(secs, small=True, short=True, single=False, colons=False):
         single: Bool use single letter labels
         colons: Bool return a string of the form 01:32:24
 
-    Returns: str
+    Returns:
+        str:
     """
     try:
         labs = [

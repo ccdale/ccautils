@@ -30,9 +30,11 @@ import ccautils.utils as UT
 def fileExists(fqfn):
     """Tests for the existance of a file.
 
-    Args: fqfn: fully-qualified file name
+    Args:
+        fqfn: str fully-qualified file name
 
-    Returns: Bool: True or False
+    Returns:
+        Bool: True or False
     """
     try:
         return Path(fqfn).is_file()
@@ -44,9 +46,11 @@ def fileExists(fqfn):
 def dirExists(fqdn):
     """Tests for the existance of a directory.
 
-    Args: fqdn: fully-qualified directory name
+    Args:
+        fqdn: fully-qualified directory name
 
-    Returns: Bool: True or False
+    Returns:
+        Bool: True or False
     """
     try:
         return Path(fqdn).is_dir()
@@ -58,9 +62,11 @@ def dirExists(fqdn):
 def dfExists(fqdfn):
     """Tests for the existance of a directory or file.
 
-    Args: fqdfn: fully-qualified directory or file name
+    Args:
+        fqdfn: fully-qualified directory or file name
 
-    Returns: Bool: True or False
+    Returns:
+        Bool: True or False
     """
     try:
         ret = fileExists(fqdfn)
@@ -77,8 +83,6 @@ def makePath(pn):
 
     Args:
         pn: the fully-qualified path to make
-
-    Returns: None
     """
     try:
         if not dirExists(pn):
@@ -92,9 +96,8 @@ def makePath(pn):
 def makeFilePath(fqfn):
     """Makes the path for the file.
 
-    Args: fqfn: fully-qualified file name
-
-    Returns: None
+    Args:
+        fqfn: fully-qualified file name
     """
     try:
         pfn = os.path.basename(fqfn)
@@ -107,9 +110,11 @@ def makeFilePath(fqfn):
 def absPath(fn):
     """Transforms the filename into a fully-qualified file name.
 
-    Args: fn: file name containing possible unix filesystem 'markers'
+    Args:
+        fn: file name containing possible unix filesystem 'markers'
 
-    Returns: string
+    Returns:
+        str:
     """
     try:
         return os.path.abspath(os.path.expanduser(fn))
@@ -125,9 +130,8 @@ def rename(src, dest):
         src: source file name
         dest: destination file name
 
-    Returns: None
-
-    Raises: Exception if source filename does not exist
+    Raises:
+        Exception: if source filename does not exist
     """
     try:
         if dfExists(src):
@@ -143,9 +147,8 @@ def rename(src, dest):
 def fileDelete(fqfn):
     """Deletes the named file.
 
-    Args: fqfn - fully-qualified filename to delete
-
-    Returns: None
+    Args:
+        fqfn: - fully-qualified filename to delete
     """
     try:
         if fileExists(fqfn):
@@ -158,9 +161,11 @@ def fileDelete(fqfn):
 def fileSize(fqfn):
     """Retrieves the size of the file in bytes.
 
-    Args: fqfn: str fully-qualified filename
+    Args:
+        fqfn: str fully-qualified filename
 
-    Returns: int: the size of the file
+    Returns:
+        int: the size of the file
     """
     try:
         if fileExists(fqfn):
@@ -184,7 +189,8 @@ def sizeof_fmt(num, suffix="B"):
         num: int a number (e.g. the size of a file)
         suffix: str a suffix to append to the output string
 
-    Returns: str num expressed in human readable units
+    Returns:
+        str: num expressed in human readable units
     """
     for unit in ["", "K", "M", "G", "T", "P", "E", "Z"]:
         if abs(num) < 1024.0:
@@ -200,10 +206,8 @@ def getFileHash(fqfn, blocksize=65536):
         fqfn: str fully-qualified file name
         blocksize: int the block size to pass to the hashing function
 
-    Returns: tuple (
-        hash: str,
-        filesize: int,
-        )
+    Returns:
+        tuple: (hash: str, filesize: int)
     """
     try:
         fnsize = fileSize(fqfn)
@@ -245,9 +249,11 @@ def fileTouch(fqfn, truncate=True):
 def readFile(fqfn):
     """Reads the file into the output string.
 
-    Args: fqfn: str fully-qualified filename
+    Args:
+        fqfn: str fully-qualified filename
 
-    Returns: str or None if file does not exist
+    Returns:
+        str: or None if file does not exist
     """
     try:
         op = None
