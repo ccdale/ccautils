@@ -28,6 +28,12 @@ import ccautils.utils as UT
 
 
 def fileExists(fqfn):
+    """Tests for the existance of a file.
+
+    Args: fqfn: fully-qualified file name
+
+    Returns: Bool: True or False
+    """
     try:
         return Path(fqfn).is_file()
     except Exception as e:
@@ -36,6 +42,12 @@ def fileExists(fqfn):
 
 
 def dirExists(fqdn):
+    """Tests for the existance of a directory.
+
+    Args: fqdn: fully-qualified directory name
+
+    Returns: Bool: True or False
+    """
     try:
         return Path(fqdn).is_dir()
     except Exception as e:
@@ -44,6 +56,12 @@ def dirExists(fqdn):
 
 
 def dfExists(fqdfn):
+    """Tests for the existance of a directory or file.
+
+    Args: fqdfn: fully-qualified directory or file name
+
+    Returns: Bool: True or False
+    """
     try:
         ret = fileExists(fqdfn)
         if not ret:
@@ -55,6 +73,13 @@ def dfExists(fqdfn):
 
 
 def makePath(pn):
+    """Makes the path.
+
+    Args:
+        pn: the fully-qualified path to make
+
+    Returns: None
+    """
     try:
         if not dirExists(pn):
             p = Path(pn)
@@ -65,6 +90,12 @@ def makePath(pn):
 
 
 def makeFilePath(fqfn):
+    """Makes the path for the file.
+
+    Args: fqfn: fully-qualified file name
+
+    Returns: None
+    """
     try:
         pfn = os.path.basename(fqfn)
         makePath(pfn)
@@ -74,6 +105,12 @@ def makeFilePath(fqfn):
 
 
 def absPath(fn):
+    """Transforms the filename into a fully-qualified file name.
+
+    Args: fn: file name containing possible unix filesystem 'markers'
+
+    Returns: string
+    """
     try:
         return os.path.abspath(os.path.expanduser(fn))
     except Exception as e:
@@ -82,6 +119,16 @@ def absPath(fn):
 
 
 def rename(src, dest):
+    """Renames src to dest.
+
+    Args:
+        src: source file name
+        dest: destination file name
+
+    Returns: None
+
+    Raises: Exception if source filename does not exist
+    """
     try:
         if dfExists(src):
             p = Path(src)
@@ -94,6 +141,12 @@ def rename(src, dest):
 
 
 def fileDelete(fqfn):
+    """Deletes the named file.
+
+    Args: fqfn - fully-qualified filename to delete
+
+    Returns: None
+    """
     try:
         if fileExists(fqfn):
             os.unlink(fqfn)
@@ -103,6 +156,12 @@ def fileDelete(fqfn):
 
 
 def fileSize(fqfn):
+    """Retrieves the size of the file in bytes.
+
+    Args: fqfn: str fully-qualified filename
+
+    Returns: int: the size of the file
+    """
     try:
         if fileExists(fqfn):
             return os.stat(fqfn).st_size
@@ -112,13 +171,20 @@ def fileSize(fqfn):
 
 
 def sizeof_fmt(num, suffix="B"):
-    """
+    """Displays the size of num in human readable units.
+
     from article by Fred Cirera:
     https://web.archive.org/web/20111010015624/http://blogmag.net/ \
             blog/read/38/Print_human_readable_file_size
     and stackoverflow:
     https://stackoverflow.com/questions/1094841/ \
             reusable-library-to-get-human-readable-version-of-file-size
+
+    Args:
+        num: int a number (e.g. the size of a file)
+        suffix: str a suffix to append to the output string
+
+    Returns: str num expressed in human readable units
     """
     for unit in ["", "K", "M", "G", "T", "P", "E", "Z"]:
         if abs(num) < 1024.0:
@@ -128,9 +194,16 @@ def sizeof_fmt(num, suffix="B"):
 
 
 def getFileHash(fqfn, blocksize=65536):
-    """
-    returns a tuple of the sha256 hash and filesize
-    of the named file.
+    """Compute the file sha256 hash and size.
+
+    Args:
+        fqfn: str fully-qualified file name
+        blocksize: int the block size to pass to the hashing function
+
+    Returns: tuple (
+        hash: str,
+        filesize: int,
+        )
     """
     try:
         fnsize = fileSize(fqfn)
@@ -147,11 +220,15 @@ def getFileHash(fqfn, blocksize=65536):
 
 
 def fileTouch(fqfn, truncate=True):
-    """ 'touches' the `fqfn` file
+    """Creates an empty file, or truncates an existing one as required.
 
     it is truncated if `truncate` is True and
     the file exists already, otherwise the
     access timestamp is just updated
+
+    Args:
+        fqfn: str fully-qualified filename
+        truncate: Bool
     """
     try:
         if fileExists(fqfn) and truncate:
@@ -166,6 +243,12 @@ def fileTouch(fqfn, truncate=True):
 
 
 def readFile(fqfn):
+    """Reads the file into the output string.
+
+    Args: fqfn: str fully-qualified filename
+
+    Returns: str or None if file does not exist
+    """
     try:
         op = None
         if os.path.exists(fqfn):

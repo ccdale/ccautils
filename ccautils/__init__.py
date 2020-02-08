@@ -1,2 +1,2 @@
-""" ccautils package"""
-__version__ = "0.1.8"
+"""Python ccautils package."""
+__version__ = "0.1.9"
