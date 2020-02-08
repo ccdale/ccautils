@@ -1,5 +1,5 @@
 import os
-import pytest
+
 import ccautils.fileutils as FT
 
 
@@ -10,7 +10,7 @@ testlines = ["one\n", "two\n", "Three"]
 
 def test_fileExists():
     got = FT.fileExists(__file__)
-    assert got == True
+    assert got is True
 
 
 def test_fileExists_nonexist():

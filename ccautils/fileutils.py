@@ -18,10 +18,10 @@
 
 a set of file based utilities for python programmes and scripts
 """
-import os
 import hashlib
-import sys
+import os
 from pathlib import Path
+import sys
 
 from ccautils.errors import errorRaise
 import ccautils.utils as UT
