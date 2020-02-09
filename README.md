@@ -1,4 +1,5 @@
 [![Tests](https://github.com/ccdale/ccautils/workflows/Tests/badge.svg)](https://github.com/ccdale/ccautils/actions?workflow=Tests)
+[![Codecov](https://codecov.io/gh/ccdale/ccautils/branch/master/graph/badge.svg)](https://codecov.io/gh/ccdale/ccautils)
 # ccautils
 
 a set of utilities for python3.6+ programs and scripts.
