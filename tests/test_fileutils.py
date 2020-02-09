@@ -1,6 +1,8 @@
 """Test file for fileutils.py file of ccautils module."""
 import os
 
+import pytest
+
 import ccautils.fileutils as FT
 
 
@@ -21,6 +23,12 @@ def test_fileExists_nonexist():
     assert got is False
 
 
+def test_fileExists_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.fileExists([])
+
+
 def test_dirExists():
     """It exits True."""
     dird = os.path.dirname(__file__)
@@ -28,11 +36,23 @@ def test_dirExists():
     assert got is True
 
 
+def test_dirExists_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.dirExists([])
+
+
 def test_dfExists():
     """It exits True."""
     dird = os.path.dirname(__file__)
     got = FT.dfExists(dird)
     assert got is True
+
+
+def test_dfExists_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.dfExists([])
 
 
 def test_absPath():
@@ -43,10 +63,22 @@ def test_absPath():
     assert got == epath
 
 
+def test_absPath_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.absPath([])
+
+
 def test_fileTouch():
     """It creates the empty file and exits True."""
     FT.fileTouch(testfile)
     assert FT.fileExists(testfile) is True
+
+
+def test_fileTouch_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.fileTouch([])
 
 
 def test_rename():
@@ -55,10 +87,28 @@ def test_rename():
     assert FT.fileExists(renamefile) is True
 
 
+def test_rename_src_non_exist():
+    """It raises an Exception."""
+    with pytest.raises(Exception):
+        FT.rename("wibble", "wobble")
+
+
+def test_rename_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.rename([], "wibble")
+
+
 def test_fileDelete():
     """It deletes the test file and exits False."""
     FT.fileDelete(renamefile)
     assert FT.fileExists(renamefile) is False
+
+
+def test_fileDelete_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.fileTouch([])
 
 
 def test_fileSize():
@@ -69,10 +119,22 @@ def test_fileSize():
     assert sz == 13
 
 
+def test_fileSize_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.fileSize([])
+
+
 def test_sizeof_fmt():
     """It displays the file size in human readable form."""
     got = FT.sizeof_fmt(6445440)
     assert got == "6.1MB"
+
+
+def test_sizeof_fmt_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.sizeof_fmt([])
 
 
 def test_getFileHash():
@@ -84,6 +146,12 @@ def test_getFileHash():
     )
 
 
+def test_getFileHash_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.getFileHash([])
+
+
 def test_readFile():
     """It sets the test string to be the content of the test file."""
     xstr = ""
@@ -91,6 +159,12 @@ def test_readFile():
         xstr += line
     fcontent = FT.readFile(testfile)
     assert xstr == fcontent
+
+
+def test_readFile_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.readFile([])
 
 
 def test_cleanup():

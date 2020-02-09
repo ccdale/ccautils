@@ -192,11 +192,15 @@ def sizeof_fmt(num, suffix="B"):
     Returns:
         str: num expressed in human readable units
     """
-    for unit in ["", "K", "M", "G", "T", "P", "E", "Z"]:
-        if abs(num) < 1024.0:
-            return f"{num:3.1f}{unit}{suffix}"
-        num /= 1024.0
-    return "{num:3.1f}Y{suffix}"
+    try:
+        for unit in ["", "K", "M", "G", "T", "P", "E", "Z"]:
+            if abs(num) < 1024.0:
+                return f"{num:3.1f}{unit}{suffix}"
+            num /= 1024.0
+        return "{num:3.1f}Y{suffix}"
+    except Exception as e:
+        fname = sys._getframe().f_code.co_name
+        errorRaise(fname, e)
 
 
 def getFileHash(fqfn, blocksize=65536):
