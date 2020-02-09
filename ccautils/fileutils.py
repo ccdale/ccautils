@@ -149,6 +149,9 @@ def fileDelete(fqfn):
 
     Args:
         fqfn: - fully-qualified filename to delete
+
+    Raises:
+        TypeError: Exception if fqfn is not a string
     """
     try:
         if fileExists(fqfn):
@@ -163,6 +166,9 @@ def fileSize(fqfn):
 
     Args:
         fqfn: str fully-qualified filename
+
+    Raises:
+        TypeError: Exception if fqfn is not a string
 
     Returns:
         int: the size of the file

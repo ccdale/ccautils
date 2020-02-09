@@ -33,6 +33,9 @@ def addToString(xstr, xadd):
         xstr: str input string
         xadd: list or str
 
+    Raises:
+        TypeError: Exception
+
     Returns:
         str:
     """
@@ -197,6 +200,9 @@ def displayValue(val, label, zero=True):
         label: str
         zero: Bool
 
+    Raises:
+        TypeError: Exception if val is not numeric
+
     Returns:
         str:
     """
@@ -204,7 +210,10 @@ def displayValue(val, label, zero=True):
         if zero and val == 0:
             return ""
         dlabel = label if val == 1 else label + "s"
-        return addToString(str(val), [" ", dlabel])
+        sval = str(val)
+        if not sval.isnumeric():
+            raise TypeError("input is not numeric")
+        return addToString(sval, [" ", dlabel])
     except Exception as e:
         fname = sys._getframe().f_code.co_name
         errorRaise(fname, e)
@@ -247,7 +256,7 @@ def decomplexifyhms(tim, index, labels, labindex, oplen, colons=False):
     Do not call this function directly
 
     Args:
-        tim: int
+        tim: list
         index: int
         labels: list
         labindex: int

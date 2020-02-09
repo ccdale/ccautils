@@ -57,7 +57,9 @@ def test_dfExists_exception():
 
 
 def test_makePath():
-    """It creates the ptestpath path"""
+    """It creates the ptestpath path."""
+    if FT.dirExists(ptestpath):
+        os.rmdir(ptestpath)
     FT.makePath(ptestpath)
     assert FT.dirExists(ptestpath) is True
 
@@ -196,4 +198,6 @@ def test_cleanup():
     """It cleans up the test files and exits False."""
     FT.fileDelete(testfile)
     FT.fileDelete(renamefile)
+    if FT.dirExists(ptestpath):
+        os.rmdir(ptestpath)
     assert FT.fileExists(testfile) is False and FT.fileExists(renamefile) is False

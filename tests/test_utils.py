@@ -71,6 +71,12 @@ def test_padStr_right_zeros():
     assert ystr == "3000"
 
 
+def test_padStr_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        UT.padStr(int(32))
+
+
 def test_reduceTime():
     """It returns a tuple of unit and modulo remainder."""
     unit = 60
@@ -78,6 +84,12 @@ def test_reduceTime():
     exp = (1, 40)
     got = UT.reduceTime(unit, secs)
     assert got == exp
+
+
+def test_reduceTime_exception():
+    """It raises a ValueError Exception."""
+    with pytest.raises(ValueError):
+        UT.reduceTime(0, 22)
 
 
 def test_displayValue():
@@ -104,6 +116,12 @@ def test_displayValue_zero():
     assert len(got) == 0
 
 
+def test_displayValue_exception():
+    """It raises a ValueError Exception."""
+    with pytest.raises(TypeError):
+        UT.displayValue([], "elephant")
+
+
 def test_secondsFromHMS():
     """It doesn't carry the under 500 milliseconds into seconds."""
     hms = "01:01:23.43"
@@ -118,6 +136,12 @@ def test_secondsFromHMS_carry():
     secs = UT.secondsFromHMS(hms)
     exp = 3600 + 60 + 23 + 1
     assert secs == exp
+
+
+def test_secondsFromHMS_exception():
+    """It raises a ValueError Exception."""
+    with pytest.raises(AttributeError):
+        UT.secondsFromHMS([])
 
 
 def test_hms_small_short():
@@ -166,6 +190,24 @@ def test_hms_colons_short():
     got = UT.hms(secs, colons=True)
     exp = "05:02"
     assert got == exp
+
+
+def test_hms_exception():
+    """It raises a ValueError Exception."""
+    with pytest.raises(TypeError):
+        UT.hms([])
+
+
+def test_decomplexifyhms():
+    got = UT.decomplexifyhms([0], 0, [["day"]], 0, 0)
+    exp = ["0 days"]
+    assert got == exp
+
+
+def test_decomplexifyhms_exception():
+    """It raises a ValueError Exception."""
+    with pytest.raises(TypeError):
+        UT.decomplexifyhms()
 
 
 @pytest.mark.ask
