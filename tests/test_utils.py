@@ -199,6 +199,7 @@ def test_hms_exception():
 
 
 def test_decomplexifyhms():
+    """It returns a list containing 1 string."""
     got = UT.decomplexifyhms([0], 0, [["day"]], 0, 0)
     exp = ["0 days"]
     assert got == exp
