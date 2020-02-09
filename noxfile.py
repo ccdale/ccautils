@@ -27,7 +27,7 @@ def install_with_constraints(session, *args, **kwargs):
         session.install(f"--constraint={requirements.name}", *args, **kwargs)
 
 
-@nox.session(python=["3.7", "3.8"])
+@nox.session(python=["3.6", "3.7", "3.8"])
 def tests(session):
     """Nox session for pytest.
 
@@ -98,7 +98,7 @@ def docs(session):
 
 
 @nox.session(python="3.8")
-def coverage(session: Session) -> None:
+def coverage(session):
     """Upload coverage data.
 
     Args:
