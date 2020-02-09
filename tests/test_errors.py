@@ -8,6 +8,12 @@ from ccautils.errors import errorRaise
 
 
 class TheException(Exception):
+    """A test Exception.
+
+    Args:
+        Exception:
+    """
+
     pass
 
 
@@ -30,7 +36,11 @@ def test_raises():
 
 
 def test_notify(capsys):
-    """It writes the error to stderr."""
+    """It writes the error to stderr.
+
+    Args:
+        capsys: pytest system handles capturing
+    """
     fname = "test_notify"
     msg = "This is the test exception"
     e = TheException(msg)
@@ -39,7 +49,7 @@ def test_notify(capsys):
     assert captured.err == f"Error in {fname}: TheException: {msg}\n"
 
 
-def test_raises():
+def test_exits():
     """It attempts sys.exit."""
     fname = "test_notify"
     msg = "This is the test exception"
