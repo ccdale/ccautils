@@ -7,6 +7,7 @@ import ccautils.fileutils as FT
 
 
 testfile = os.environ.get("HOME") + "/testfile-deleteme"
+ptestpath = "/tmp/ccautils-test-dir"
 renamefile = os.path.dirname(testfile) + "/renamed-testfile-deleteme"
 testlines = ["one\n", "two\n", "Three"]
 
@@ -53,6 +54,30 @@ def test_dfExists_exception():
     """It raises a TypeError Exception."""
     with pytest.raises(TypeError):
         FT.dfExists([])
+
+
+def test_makePath():
+    """It creates the ptestpath path"""
+    FT.makePath(ptestpath)
+    assert FT.dirExists(ptestpath) is True
+
+
+def test_makePath_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.makePath([])
+
+
+def test_makeFilePath():
+    """It creates the directory structure for the testfile."""
+    FT.makeFilePath(testfile)
+    assert FT.dirExists(os.environ.get("HOME")) is True
+
+
+def test_makeFilePath_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        FT.makeFilePath([])
 
 
 def test_absPath():

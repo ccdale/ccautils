@@ -45,8 +45,10 @@ def addToString(xstr, xadd):
             for xi in xadd:
                 if type(xi) is str:
                     op += xi
-        else:
+        elif type(xadd) is str:
             op += xadd
+        else:
+            raise TypeError("Input format error. xadd is neither list nor string")
         return op
     except Exception as e:
         fname = sys._getframe().f_code.co_name

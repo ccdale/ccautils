@@ -12,6 +12,12 @@ def test_addToStringStr():
     assert zstr == "A String added"
 
 
+def test_addToString_exception():
+    """It raises a TypeError Exception."""
+    with pytest.raises(TypeError):
+        UT.addToString("", int(23))
+
+
 def test_addToStringList():
     """List is exploded and each member is concatenated."""
     xstr = "A String"
@@ -28,6 +34,12 @@ def test_delimitStringList():
     assert zstr == "A String added"
 
 
+def test_delimitString_exception():
+    """It raises a ValueError Exception."""
+    with pytest.raises(ValueError):
+        UT.delimitString(int(32))
+
+
 def test_makeDictFromString():
     """It removes extraneous white space and forms a dict from the string."""
     istr = "someparam   = somevalue,someotherparam =someothervalue  "
@@ -37,6 +49,12 @@ def test_makeDictFromString():
         "someotherparam": "someothervalue",
     }
     assert xd == wd
+
+
+def test_makeDictFromString_exception():
+    """It raises a ValueError Exception."""
+    with pytest.raises(TypeError):
+        UT.makeDictFromString(int(32))
 
 
 def test_padStr_left():
