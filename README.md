@@ -1,12 +1,13 @@
 [![Tests](https://github.com/ccdale/ccautils/workflows/Tests/badge.svg)](https://github.com/ccdale/ccautils/actions?workflow=Tests)
 # ccautils
 
-a set of utilities for python3.6+ programmes and scripts.
+a set of utilities for python3.6+ programs and scripts.
 
 <a name=headdd></a>
 * [Install](#install)
 * [Development](#devel)
 * [Testing](#testing)
+* [Error Utilities](#errors)
 * [Miscellaneous Utilities](#utils)
     * [Usage](#uusage)
 * [File Utilities](#futils)
@@ -40,12 +41,37 @@ poetry install
 
 <a name=testing></a>
 ## [Testing](#headdd)
-To run the tests you must have `pytest` and `poetry` installed.
+To run the tests you must have `pytest`, `nox` and `poetry` installed.
+
+install nox into your python user environment.
+```
+pip install nox --user
+```
+
+Run the tests with
 
 ```
-poetry install
-poetry run pytest
+nox -rs tests
 ```
+
+Run the linter with
+
+```
+nox -rs lint
+```
+
+Run the console ask tests with
+
+```
+nox -rs tests -- -sm ask
+```
+
+<a name=errors></a>
+## Error Utilities(#headdd)
+
+See the [code](https://github.com/ccdale/ccautils) for how to use these
+Exception helpers.
+
 
 <a name=utils></a>
 ## [Miscellaneous Utilities](#headdd)

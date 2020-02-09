@@ -1,4 +1,6 @@
 """Test file for utils.py file of ccautils module."""
+import pytest
+
 import ccautils.utils as UT
 
 
@@ -148,17 +150,19 @@ def test_hms_colons_short():
     assert got == exp
 
 
-# def test_askMe():
-#     """askMe string input test."""
-#     query = "Please press the"
-#     default = "enter key"
-#     v = UT.askMe(query, default)
-#     assert v == default
-#
-#
-# def test_askMeNumeric():
-#     """askMe numeric input test."""
-#     query = "press 5 and enter"
-#     default = "5"
-#     v = UT.askMe(query, default)
-#     assert v == "5"
+@pytest.mark.ask
+def test_askMe():
+    """String input test."""
+    query = "Please press the"
+    default = "enter key"
+    v = UT.askMe(query, default)
+    assert v == default
+
+
+@pytest.mark.ask
+def test_askMeNumeric():
+    """Numeric input test."""
+    query = "press 5 and enter"
+    default = "5"
+    v = UT.askMe(query, default)
+    assert v == "5"
