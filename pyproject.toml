@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ccautils"
-version = "0.2.1"
+version = "0.3.0"
 description = "A set of useful utilities for python programs"
 authors = ["ccdale <chris.charles.allison+ccautils@gmail.com>"]
 license = "GPL-3.0-or-later"
@@ -25,6 +25,7 @@ flake8-import-order = "^0.18.1"
 safety = "^1.8.5"
 sphinx-autodoc-typehints = "^1.10.3"
 codecov = "^2.0.15"
+flake8-black = "^0.1.1"
 
 [tool.coverage.paths]
 source = ["src"]

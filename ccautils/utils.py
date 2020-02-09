@@ -17,9 +17,6 @@
 """Miscellaneous utility functions.
 
 a set of utilities for python programmes and scripts
-
-Usage:
-    ``import ccautils.utils as UT``
 """
 import sys
 
