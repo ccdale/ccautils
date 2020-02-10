@@ -85,7 +85,7 @@ def makePath(pn):
         pn: the fully-qualified path to make
     """
     try:
-        if not dirExists(pn):
+        if not dfExists(pn):
             p = Path(pn)
             p.mkdir(mode=0o755, parents=True, exist_ok=True)
     except Exception as e:
