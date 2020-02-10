@@ -123,6 +123,8 @@ def askMe(q, default):
         q: str input question
         default: str default answer
 
+    Raises:
+        TypeError: if input `q` is not a string
     Returns:
         str: user input or default
     """

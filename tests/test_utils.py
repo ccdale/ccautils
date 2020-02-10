@@ -1,6 +1,7 @@
 """Test file for utils.py file of ccautils module."""
-import sys
 import io
+import sys
+
 import pytest
 
 import ccautils.utils as UT
@@ -78,7 +79,7 @@ def test_makeDictFromString():
 
 
 def test_makeDictFromString_not_matching():
-    """It returns an empty dict"""
+    """It returns an empty dict."""
     istr = "someparam    somevalue,someotherparam someothervalue  "
     xd = UT.makeDictFromString(istr)
     assert xd == {}
