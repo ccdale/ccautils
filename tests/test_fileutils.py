@@ -221,7 +221,7 @@ def test_readFile():
 def test_readFile_not_exist():
     """It returns None as the file does not exist."""
     fcontent = FT.readFile("/wibble")
-    assert None == fcontent
+    assert fcontent is None
 
 
 def test_readFile_exception():

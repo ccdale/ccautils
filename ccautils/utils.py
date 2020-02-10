@@ -125,6 +125,7 @@ def askMe(q, default):
 
     Raises:
         TypeError: if input `q` is not a string
+
     Returns:
         str: user input or default
     """
