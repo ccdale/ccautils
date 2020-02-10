@@ -3,7 +3,7 @@ import tempfile
 
 import nox
 
-nox.options.sessions = "lint", "tests", "safety", "testcoverage"
+nox.options.sessions = "tests"
 locations = "ccautils", "noxfile.py", "tests", "docs/conf.py"
 
 
