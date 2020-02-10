@@ -1,4 +1,6 @@
 """Test file for utils.py file of ccautils module."""
+import sys
+import io
 import pytest
 
 import ccautils.utils as UT
@@ -10,6 +12,14 @@ def test_addToStringStr():
     astr = " added"
     zstr = UT.addToString(xstr, astr)
     assert zstr == "A String added"
+
+
+def test_addToString_not_str_input():
+    """Input strings are concatenated."""
+    xstr = []
+    astr = " added"
+    zstr = UT.addToString(xstr, astr)
+    assert zstr == astr
 
 
 def test_addToString_exception():
@@ -24,6 +34,22 @@ def test_addToStringList():
     lstr = [" ", "added"]
     zstr = UT.addToString(xstr, lstr)
     assert zstr == "A String added"
+
+
+def test_addToString_mixed_List():
+    """List is exploded and each member is concatenated."""
+    xstr = "A String"
+    lstr = [" ", 22, "added"]
+    zstr = UT.addToString(xstr, lstr)
+    assert zstr == "A String added"
+
+
+def test_delimitString_string():
+    """It splits the input string and concatenates each string with the delimeter."""
+    delim = " | "
+    xadd = "A String Added"
+    zstr = UT.delimitString(xadd, delim)
+    assert zstr == "A | String | Added"
 
 
 def test_delimitStringList():
@@ -49,6 +75,13 @@ def test_makeDictFromString():
         "someotherparam": "someothervalue",
     }
     assert xd == wd
+
+
+def test_makeDictFromString_not_matching():
+    """It returns an empty dict"""
+    istr = "someparam    somevalue,someotherparam someothervalue  "
+    xd = UT.makeDictFromString(istr)
+    assert xd == {}
 
 
 def test_makeDictFromString_exception():
@@ -138,6 +171,22 @@ def test_secondsFromHMS_carry():
     assert secs == exp
 
 
+def test_secondsFromHMS_one_short():
+    """It doesn't carry the under 500 milliseconds into seconds."""
+    hms = "01:23.43"
+    secs = UT.secondsFromHMS(hms)
+    exp = 60 + 23
+    assert secs == exp
+
+
+def test_secondsFromHMS_two_short():
+    """It doesn't carry the under 500 milliseconds into seconds."""
+    hms = "23.43"
+    secs = UT.secondsFromHMS(hms)
+    exp = 23
+    assert secs == exp
+
+
 def test_secondsFromHMS_exception():
     """It raises a ValueError Exception."""
     with pytest.raises(AttributeError):
@@ -207,8 +256,36 @@ def test_decomplexifyhms():
 
 def test_decomplexifyhms_exception():
     """It raises a ValueError Exception."""
+    with pytest.raises(IndexError):
+        UT.decomplexifyhms([1], 2, [], 1, 1)
+
+
+def test_askMe_exception():
+    """It raises a ValueError Exception."""
     with pytest.raises(TypeError):
-        UT.decomplexifyhms()
+        UT.askMe([], "splodge")
+
+
+def test_askMe_stdin_redirect():
+    """String input test."""
+    original_stdin = sys.stdin
+    sys.stdin = io.StringIO("hello\n")
+    query = "Please press the"
+    default = "enter key"
+    v = UT.askMe(query, default)
+    sys.stdin = original_stdin
+    assert v == "hello"
+
+
+def test_askMe_stdin_redirect_default():
+    """String input test."""
+    original_stdin = sys.stdin
+    sys.stdin = io.StringIO("\n")
+    query = "Please press the"
+    default = "enter key"
+    v = UT.askMe(query, default)
+    sys.stdin = original_stdin
+    assert v == default
 
 
 @pytest.mark.ask

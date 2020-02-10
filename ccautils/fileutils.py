@@ -197,7 +197,6 @@ def sizeof_fmt(num, suffix="B"):
             if abs(num) < 1024.0:
                 return f"{num:3.1f}{unit}{suffix}"
             num /= 1024.0
-        return "{num:3.1f}Y{suffix}"
     except Exception as e:
         fname = sys._getframe().f_code.co_name
         errorRaise(fname, e)
@@ -260,12 +259,10 @@ def readFile(fqfn):
         str: or None if file does not exist
     """
     try:
-        op = None
         if os.path.exists(fqfn):
             with open(fqfn, "r") as ifn:
                 lines = ifn.readlines()
-            op = UT.addToString(op, lines)
-        return op
+            return UT.addToString("", lines)
     except Exception as e:
         fname = sys._getframe().f_code.co_name
         errorRaise(fname, e)

@@ -127,6 +127,8 @@ def askMe(q, default):
         str: user input or default
     """
     try:
+        if type(q) is not str:
+            raise TypeError("Input error, question is not a string.")
         ret = default
         val = input(f"{q} ({default}) > ")
         if len(val) > 0:
@@ -242,7 +244,7 @@ def secondsFromHMS(shms):
         elif cn == 2:
             mins = int(tmp[0])
             secs = int(tmp[1])
-        elif cn == 1:
+        else:
             secs = int(tmp[0])
         return (hrs * 3600) + (mins * 60) + secs + extra
     except Exception as e:

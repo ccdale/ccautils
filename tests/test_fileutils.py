@@ -102,6 +102,18 @@ def test_fileTouch():
     assert FT.fileExists(testfile) is True
 
 
+def test_fileTouch_exist():
+    """It creates the empty file and exits True."""
+    FT.fileTouch(testfile, truncate=False)
+    assert FT.fileExists(testfile) is True
+
+
+def test_fileTouch_exist_truncate():
+    """It creates the empty file and exits True."""
+    FT.fileTouch(testfile, truncate=True)
+    assert FT.fileExists(testfile) is True
+
+
 def test_fileTouch_exception():
     """It raises a TypeError Exception."""
     with pytest.raises(TypeError):
@@ -135,7 +147,7 @@ def test_fileDelete():
 def test_fileDelete_exception():
     """It raises a TypeError Exception."""
     with pytest.raises(TypeError):
-        FT.fileTouch([])
+        FT.fileDelete([])
 
 
 def test_fileSize():
@@ -144,6 +156,12 @@ def test_fileSize():
         ofn.writelines(testlines)
     sz = FT.fileSize(testfile)
     assert sz == 13
+
+
+def test_fileSize_not_exist():
+    """It computes the size of the file."""
+    sz = FT.fileSize("/bibble")
+    assert sz is None
 
 
 def test_fileSize_exception():
@@ -156,6 +174,18 @@ def test_sizeof_fmt():
     """It displays the file size in human readable form."""
     got = FT.sizeof_fmt(6445440)
     assert got == "6.1MB"
+
+
+def test_sizeof_fmt_large():
+    """It displays the file size in human readable form."""
+    got = FT.sizeof_fmt(644 * (1024 ** 7))
+    assert got == "644.0ZB"
+
+
+def test_sizeof_fmt_too_large():
+    """It displays the file size in human readable form."""
+    got = FT.sizeof_fmt(644 * (1024 ** 8))
+    assert got is None
 
 
 def test_sizeof_fmt_exception():
@@ -186,6 +216,12 @@ def test_readFile():
         xstr += line
     fcontent = FT.readFile(testfile)
     assert xstr == fcontent
+
+
+def test_readFile_not_exist():
+    """It returns None as the file does not exist."""
+    fcontent = FT.readFile("/wibble")
+    assert None == fcontent
 
 
 def test_readFile_exception():
