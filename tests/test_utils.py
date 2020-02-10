@@ -287,21 +287,3 @@ def test_askMe_stdin_redirect_default():
     v = UT.askMe(query, default)
     sys.stdin = original_stdin
     assert v == default
-
-
-@pytest.mark.ask
-def test_askMe():
-    """String input test."""
-    query = "Please press the"
-    default = "enter key"
-    v = UT.askMe(query, default)
-    assert v == default
-
-
-@pytest.mark.ask
-def test_askMeNumeric():
-    """Numeric input test."""
-    query = "press 5 and enter"
-    default = "5"
-    v = UT.askMe(query, default)
-    assert v == "5"
