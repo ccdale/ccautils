@@ -26,6 +26,26 @@ def install_with_constraints(session, *args, **kwargs):
         session.install(f"--constraint={requirements.name}", *args, **kwargs)
 
 
+def externalInstallWithConstraints(session, *args, **kwargs):
+    """Constraints for packages installed (external poetry version).
+
+    Args:
+        session: nox session
+        args: args
+        kwargs: kwargs
+    """
+    with tempfile.NamedTemporaryFile() as requirements:
+        session.run(
+            "poetry",
+            "export",
+            "--dev",
+            "--format=requirements.txt",
+            f"--output={requirements.name}",
+            external=True,
+        )
+        session.install(f"--constraint={requirements.name}", *args, **kwargs)
+
+
 def installPoetry(session):
     """Installs poetry into the nox venv.
 
@@ -146,7 +166,8 @@ def coverage(session):
     Args:
         session: nox session
     """
-    installPoetry(session)
-    install_with_constraints(session, "coverage[toml]", "codecov")
+    # installPoetry(session)
+    externalInstallWithConstraints(session, "coverage[toml]", "codecov")
+    # install_with_constraints(session, "coverage[toml]", "codecov")
     session.run("coverage", "xml", "--fail-under=0")
     session.run("codecov", *session.posargs)
