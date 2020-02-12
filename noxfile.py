@@ -47,7 +47,7 @@ def tests(session):
     args = session.posargs or ["--cov"]
     # args = session.posargs
     installPoetry(session)
-    session.run("poetry", "install", external=True)
+    session.run("poetry", "install")
     install_with_constraints(session, "coverage[toml]", "pytest", "pytest-cov")
     session.run("pytest", *args)
 
