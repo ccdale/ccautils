@@ -1,6 +1,7 @@
 [![Tests](https://github.com/ccdale/ccautils/workflows/Tests/badge.svg)](https://github.com/ccdale/ccautils/actions?workflow=Tests)
 [![Codecov](https://codecov.io/gh/ccdale/ccautils/branch/master/graph/badge.svg)](https://codecov.io/gh/ccdale/ccautils)
-[![PyPI](https://img.shields.io/pypi/v/hypermodern-python.svg)](https://pypi.org/project/hypermodern-python/)
+[![Python](https://img.shields.io/pypi/pyversions/ccautils)](https://pypi.org/project/ccautils/)
+[![PyPI](https://img.shields.io/pypi/v/ccautils)](https://pypi.org/project/ccautils/)
 # ccautils
 
 a set of utilities for python3.6+ programs and scripts.
