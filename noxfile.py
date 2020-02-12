@@ -3,7 +3,7 @@ import tempfile
 
 import nox
 
-nox.options.sessions = ["tests"]
+nox.options.sessions = ["lint", "tests"]
 locations = "ccautils", "noxfile.py", "tests", "docs/conf.py"
 
 
@@ -44,7 +44,8 @@ def xtest(session):
     """
     args = session.posargs
     installPoetry(session)
-    session.run("poetry", "install", "--no-dev")
+    # session.run("poetry", "install", "--no-dev")
+    session.run("poetry", "install")
     session.install("pytest")
     session.run("pytest", *args)
 
@@ -58,7 +59,8 @@ def tests(session):
     """
     args = session.posargs or ["--cov"]
     installPoetry(session)
-    session.run("poetry", "install", "--no-dev")
+    # session.run("poetry", "install", "--no-dev")
+    session.run("poetry", "install")
     install_with_constraints(session, "coverage[toml]", "pytest", "pytest-cov")
     session.run("pytest", *args)
 
@@ -72,7 +74,8 @@ def testcoverage(session):
     """
     args = session.posargs or ["--cov"]
     installPoetry(session)
-    session.run("poetry", "install", "--no-dev")
+    # session.run("poetry", "install", "--no-dev")
+    session.run("poetry", "install")
     install_with_constraints(session, "coverage[toml]", "pytest", "pytest-cov")
     session.run("pytest", *args)
 
@@ -128,7 +131,8 @@ def docs(session):
         session: nox session
     """
     installPoetry(session)
-    session.run("poetry", "install", "--no-dev")
+    # session.run("poetry", "install", "--no-dev")
+    session.run("poetry", "install")
     install_with_constraints(
         session, "sphinx", "recommonmark", "sphinx-autodoc-typehints"
     )
