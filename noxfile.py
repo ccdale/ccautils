@@ -166,8 +166,11 @@ def coverage(session):
     Args:
         session: nox session
     """
+    args = session.posargs or ["--cov"]
     # installPoetry(session)
-    externalInstallWithConstraints(session, "coverage[toml]", "codecov")
+    # externalInstallWithConstraints(session, "coverage[toml]", "codecov")
+    externalInstallWithConstraints(session, "coverage[toml]", "pytest", "pytest-cov")
     # install_with_constraints(session, "coverage[toml]", "codecov")
+    session.run("pytest", *args)
     session.run("coverage", "xml", "--fail-under=0")
     session.run("codecov", *session.posargs)
