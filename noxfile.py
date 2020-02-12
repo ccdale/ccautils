@@ -85,7 +85,7 @@ def tests(session):
     session.run("pytest", *args)
 
 
-@nox.session(python=["3.6"])
+@nox.session(python=["3.8"])
 def testcoverage(session):
     """Nox session for test coverage.
 
@@ -98,6 +98,8 @@ def testcoverage(session):
     session.run("poetry", "install")
     install_with_constraints(session, "coverage[toml]", "pytest", "pytest-cov")
     session.run("pytest", *args)
+    session.run("coverage", "xml", "--fail-under=0")
+    session.run("codecov", *session.posargs)
 
 
 @nox.session(python=["3.8"])
