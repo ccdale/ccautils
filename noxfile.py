@@ -3,7 +3,7 @@ import tempfile
 
 import nox
 
-nox.options.sessions = "tests"
+nox.options.sessions = ["lint", "tests"]
 locations = "ccautils", "noxfile.py", "tests", "docs/conf.py"
 
 
@@ -27,7 +27,8 @@ def install_with_constraints(session, *args, **kwargs):
         session.install(f"--constraint={requirements.name}", *args, **kwargs)
 
 
-@nox.session(python=["3.6", "3.7", "3.8"])
+# @nox.session(python=["3.6", "3.7", "3.8"])
+@nox.session(python=["3.6"])
 def tests(session):
     """Nox session for pytest.
 
@@ -41,7 +42,7 @@ def tests(session):
     session.run("pytest", *args)
 
 
-@nox.session(python=["3.8"])
+@nox.session(python=["3.6"])
 def testcoverage(session):
     """Nox session for test coverage.
 
@@ -54,7 +55,7 @@ def testcoverage(session):
     session.run("pytest", *args)
 
 
-@nox.session(python=["3.8"])
+@nox.session(python=["3.6"])
 def lint(session):
     """Nox session for linting.
 
@@ -75,7 +76,7 @@ def lint(session):
     session.run("flake8", *args)
 
 
-@nox.session(python="3.8")
+@nox.session(python="3.6")
 def safety(session):
     """Nox session for safety.
 
@@ -96,7 +97,7 @@ def safety(session):
         session.run("safety", "check", f"--file={requirements.name}", "--full-report")
 
 
-@nox.session(python=["3.8"])
+@nox.session(python=["3.6"])
 def docs(session):
     """Nox session for documention.
 
@@ -110,7 +111,7 @@ def docs(session):
     session.run("sphinx-build", "docs", "docs/_build")
 
 
-@nox.session(python="3.8")
+@nox.session(python="3.6")
 def coverage(session):
     """Upload coverage data.
 
