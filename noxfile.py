@@ -27,6 +27,15 @@ def install_with_constraints(session, *args, **kwargs):
         session.install(f"--constraint={requirements.name}", *args, **kwargs)
 
 
+def installPoetry(session):
+    """Installs poetry into the nox venv.
+
+    Args:
+        session: the nox session
+    """
+    session.run("python", "-m", "pip", "install", "poetry")
+
+
 # @nox.session(python=["3.6", "3.7", "3.8"])
 @nox.session(python=["3.6"])
 def tests(session):
@@ -37,6 +46,7 @@ def tests(session):
     """
     args = session.posargs or ["--cov"]
     # args = session.posargs
+    installPoetry(session)
     session.run("poetry", "install", external=True)
     install_with_constraints(session, "coverage[toml]", "pytest", "pytest-cov")
     session.run("pytest", *args)
@@ -63,6 +73,7 @@ def lint(session):
         session: nox session
     """
     args = session.posargs or locations
+    installPoetry(session)
     install_with_constraints(
         session,
         "flake8",
