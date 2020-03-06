@@ -5,6 +5,7 @@ description = "A set of useful utilities for python programs"
 authors = ["ccdale <chris.charles.allison+ccautils@gmail.com>"]
 license = "GPL-3.0-or-later"
 readme = "README.md"
+repository = "https://github.com/ccdale/ccautils"
 
 [tool.poetry.dependencies]
 python = "^3.6"

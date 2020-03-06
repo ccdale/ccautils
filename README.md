@@ -263,6 +263,33 @@ UT.hms(secs, colons=True)
 > "01:02:05:34"
 ```
 
+<a name=fuzzyexpires></a>
+### [fuzzyExpires(dt)](#menu)
+
+[Code](https://github.com/ccdale/ccautils/blob/master/ccautils/utils.py#L381)
+
+Given a `datetime` object, computes the difference between now and that
+time.  Returns a tuple of (`ts`: unix timestamp of `dt`, `op`: string)
+
+The returned string gives the approximate time left between now and the
+`dt` object or the string 'EXPIRED'.
+
+```
+
+    """It returns 2 hours 20 minutes and some seconds."""
+    ts = int(time.time())
+    ts += (3600 * 2) + (60 * 20)
+    dt = datetime.datetime.fromtimestamp(ts)
+    gotts, gotstr = UT.fuzzyExpires(dt)
+
+
+    """It returns 1 year and 2 months."""
+    ts = int(time.time())
+    ts += (86400 * 365) + (86400 * 70)
+    dt = datetime.datetime.fromtimestamp(ts)
+    gotts, gotstr = UT.fuzzyExpires(dt)
+```
+
 <a name=futils></a>
 ## [File Utilities](#headdd)
 
