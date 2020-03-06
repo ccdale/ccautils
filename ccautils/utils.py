@@ -19,9 +19,10 @@
 a set of utilities for python programmes and scripts
 """
 import datetime
-from dateutil.relativedelta import relativedelta
 import sys
 import time
+
+from dateutil.relativedelta import relativedelta
 
 from ccautils.errors import errorRaise
 
@@ -353,15 +354,39 @@ def hms(secs, small=True, short=True, single=False, colons=False):
 
 
 def timestampFromDatetime(dt):
+    """Convert from datetime to timestamp.
+
+    Args:
+        dt: datetime object
+
+    Returns:
+        ts: unix timestamp
+    """
     ts = datetime.datetime.timestamp(dt)
     return ts
 
 
 def tsFromDt(dt):
+    """Convert from datetime to timestamp.
+
+    Args:
+        dt: datetime object
+
+    Returns:
+        ts: unix timestamp
+    """
     return timestampFromDatetime(dt)
 
 
 def fuzzyExpires(dt):
+    """How long between now and datetime.
+
+    Args:
+        dt: datetime object
+
+    Returns:
+        tuple: (ts: unix timestamp, op: string)
+    """
     ts = timestampFromDatetime(dt)
     now = int(time.time())
     op = ""

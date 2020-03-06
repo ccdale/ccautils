@@ -322,7 +322,6 @@ def test_fuzzyExpires_gt_month():
     """It returns 1 month and some days."""
     ts = int(time.time())
     ts += 86400 * 33
-    expstr = "1 year 2 months"
     dt = datetime.datetime.fromtimestamp(ts)
     gotts, gotstr = UT.fuzzyExpires(dt)
     assert gotstr.startswith("1 month")
