@@ -109,7 +109,7 @@ def covhtml(session):
     Args:
         session: nox session
     """
-    args = session.posargs or ["--cov", "--cov-report html:htmlcov"]
+    args = session.posargs or ["--cov", "--cov-report", "html:htmlcov"]
     installPoetry(session)
     # session.run("poetry", "install", "--no-dev")
     session.run("poetry", "install")
