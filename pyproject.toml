@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ccautils"
-version = "0.3.8"
+version = "0.4.0"
 description = "A set of useful utilities for python programs"
 authors = ["ccdale <chris.charles.allison+ccautils@gmail.com>"]
 license = "GPL-3.0-or-later"
@@ -9,6 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.6"
 toml = "^0.10.0"
+python-dateutil = "^2.8.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.3.5"

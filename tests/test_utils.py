@@ -1,6 +1,8 @@
 """Test file for utils.py file of ccautils module."""
+import datetime
 import io
 import sys
+import time
 
 import pytest
 
@@ -287,3 +289,58 @@ def test_askMe_stdin_redirect_default():
     v = UT.askMe(query, default)
     sys.stdin = original_stdin
     assert v == default
+
+
+def test_tsFromDt():
+    """It returns an INT."""
+    dt = datetime.datetime(year=2020, month=3, day=6, hour=16, minute=19, second=12)
+    exp = 1583511552
+    got = UT.tsFromDt(dt)
+    assert got == exp
+
+
+def test_fuzzyExpires_Expired():
+    """It returns the string 'EXPIRED'."""
+    dt = datetime.datetime(year=2020, month=3, day=6, hour=16, minute=19, second=12)
+    expts = 1583511552
+    expstr = "EXPIRED"
+    gotts, gotstr = UT.fuzzyExpires(dt)
+    assert expstr == gotstr and expts == gotts
+
+
+def test_fuzzyExpires_gt_year():
+    """It returns 1 year and 2 months."""
+    ts = int(time.time())
+    ts += (86400 * 365) + (86400 * 70)
+    expstr = "1 year 2 months"
+    dt = datetime.datetime.fromtimestamp(ts)
+    gotts, gotstr = UT.fuzzyExpires(dt)
+    assert gotstr == expstr
+
+
+def test_fuzzyExpires_gt_month():
+    """It returns 1 month and some days."""
+    ts = int(time.time())
+    ts += 86400 * 33
+    expstr = "1 year 2 months"
+    dt = datetime.datetime.fromtimestamp(ts)
+    gotts, gotstr = UT.fuzzyExpires(dt)
+    assert gotstr.startswith("1 month")
+
+
+def test_fuzzyExpires_lt_month():
+    """It returns 23 days and some hours."""
+    ts = int(time.time())
+    ts += 86400 * 23
+    dt = datetime.datetime.fromtimestamp(ts)
+    gotts, gotstr = UT.fuzzyExpires(dt)
+    assert gotstr.startswith("23 days")
+
+
+def test_fuzzyExpires_lt_day():
+    """It returns 2 hours 20 minutes and some seconds."""
+    ts = int(time.time())
+    ts += (3600 * 2) + (60 * 20)
+    dt = datetime.datetime.fromtimestamp(ts)
+    gotts, gotstr = UT.fuzzyExpires(dt)
+    assert gotstr.startswith("2 hours 20 minutes")

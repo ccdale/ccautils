@@ -103,6 +103,21 @@ def testcoverage(session):
 
 
 @nox.session(python=["3.8"])
+def covhtml(session):
+    """Nox session for test coverage.
+
+    Args:
+        session: nox session
+    """
+    args = session.posargs or ["--cov", "--cov-report html:htmlcov"]
+    installPoetry(session)
+    # session.run("poetry", "install", "--no-dev")
+    session.run("poetry", "install")
+    install_with_constraints(session, "coverage[toml]", "pytest", "pytest-cov")
+    session.run("pytest", *args)
+
+
+@nox.session(python=["3.8"])
 def lint(session):
     """Nox session for linting.
 

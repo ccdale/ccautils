@@ -21,12 +21,9 @@ a set of utilities for python programmes and scripts
 import datetime
 from dateutil.relativedelta import relativedelta
 import sys
-
-import ccalogging
+import time
 
 from ccautils.errors import errorRaise
-
-log = ccalogging.log
 
 
 def addToString(xstr, xadd):
@@ -356,9 +353,7 @@ def hms(secs, small=True, short=True, single=False, colons=False):
 
 
 def timestampFromDatetime(dt):
-    log.debug("timestampFromDatetime: {}".format(dt))
     ts = datetime.datetime.timestamp(dt)
-    log.debug("ts: {}".format(ts))
     return ts
 
 
@@ -369,33 +364,32 @@ def tsFromDt(dt):
 def fuzzyExpires(dt):
     ts = timestampFromDatetime(dt)
     now = int(time.time())
-    if ts <= now:
-        op = "EXPIRED"
+    op = ""
+    then = datetime.datetime.fromtimestamp(ts)
+    now = datetime.datetime.fromtimestamp(now)
+    diff = relativedelta(then, now)
+    if diff.years > 0:
+        tstr = displayValue(diff.years, "year")
+        op = addToString(op, tstr)
+        tstr = displayValue(diff.months, "month")
+        op = addToString(op, [" ", tstr])
+    elif diff.months > 0:
+        tstr = displayValue(diff.months, "month")
+        op = addToString(op, tstr)
+        tstr = displayValue(diff.days, "day")
+        op = addToString(op, [" ", tstr])
+    elif diff.days > 0:
+        tstr = displayValue(diff.days, "day")
+        op = addToString(op, tstr)
+        tstr = displayValue(diff.hours, "hour")
+        op = addToString(op, [" ", tstr])
+    elif diff.hours > 0:
+        tstr = displayValue(diff.hours, "hour")
+        op = addToString(op, tstr)
+        tstr = displayValue(diff.minutes, "minute")
+        op = addToString(op, [" ", tstr])
+        tstr = displayValue(diff.seconds, "second")
+        op = addToString(op, [" ", tstr])
     else:
-        op = ""
-        then = datetime.datetime.fromtimestamp(ts)
-        now = datetime.datetime.fromtimestamp(now)
-        diff = relativedelta(then, now)
-        if diff.years > 0:
-            tstr = displayValue(diff.years, "year")
-            op = addToString(op, tstr)
-            tstr = displayValue(diff.months, "month")
-            op = addToString(op, tstr)
-        elif diff.months > 0:
-            tstr = displayValue(diff.months, "month")
-            op = addToString(op, tstr)
-            tstr = displayValue(diff.days, "day")
-            op = addToString(op, tstr)
-        elif diff.days > 0:
-            tstr = displayValue(diff.days, "day")
-            op = addToString(op, tstr)
-            tstr = displayValue(diff.hours, "hour")
-            op = addToString(op, tstr)
-        elif diff.hours > 0:
-            tstr = displayValue(diff.hours, "hour")
-            op = addToString(op, tstr)
-            tstr = displayValue(diff.minutes, "minute")
-            op = addToString(op, tstr)
-            tstr = displayValue(diff.seconds, "second")
-            op = addToString(op, tstr)
+        op = "EXPIRED"
     return (ts, op)
