@@ -350,3 +350,10 @@ def test_runCmd():
     cmd = ["ls"]
     res, stdout, stderr = UT.runCmd(cmd)
     assert 0 == res
+
+
+def test_runCmd_fail():
+    """It raises an Exception."""
+    cmd = ["ls", "missingfile"]
+    with pytest.raises(Exception):
+        res, stdout, stderr = UT.runCmd(cmd)

@@ -434,4 +434,5 @@ def runCmd(cmd):
             raise Exception(msg)
         return (res.returncode, stdout, stderr)
     except Exception as e:
-        log.error(f"Exception in runcmd: {e}, cmd: {cmd}")
+        fname = sys._getframe().f_code.co_name
+        errorRaise(fname, e)
