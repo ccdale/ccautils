@@ -343,3 +343,10 @@ def test_fuzzyExpires_lt_day():
     dt = datetime.datetime.fromtimestamp(ts)
     gotts, gotstr = UT.fuzzyExpires(dt)
     assert gotstr.startswith("2 hours 20 minutes")
+
+
+def test_runCmd():
+    """It can run the unix ls command without error"""
+    cmd = ["ls"]
+    res, stdout, stderr = UT.runCmd(cmd)
+    assert 0 == res

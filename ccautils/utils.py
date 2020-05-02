@@ -19,6 +19,7 @@
 a set of utilities for python programmes and scripts
 """
 import datetime
+import subprocess
 import sys
 import time
 
@@ -418,3 +419,19 @@ def fuzzyExpires(dt):
     else:
         op = "EXPIRED"
     return (ts, op)
+
+
+def runCmd(cmd):
+    try:
+        res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout = res.stdout.decode()
+        stderr = res.stderr.decode()
+        if res.returncode != 0:
+            msg = f"runCmd FAIL: cmd: {cmd}, "
+            msg += f"returncode: {res.returncode}, "
+            msg += f"stderr: {stderr}, "
+            msg += f"stdout: {stdout}"
+            raise Exception(msg)
+        return (res.returncode, stdout, stderr)
+    except Exception as e:
+        log.error(f"Exception in runcmd: {e}, cmd: {cmd}")
